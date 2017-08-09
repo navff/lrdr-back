@@ -1,0 +1,907 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="T:API.BundleConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:API.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)">
+            <summary>
+            
+            </summary>
+            <param name="bundles"></param>
+        </member>
+        <member name="T:API.MapperMappings">
+            <summary>
+            Маппинг для Automapper
+            </summary>
+        </member>
+        <member name="M:API.MapperMappings.Map">
+            <summary>
+            Главный метод
+            </summary>
+        </member>
+        <member name="M:API.App_Start.NinjectWebCommon.Start">
+            <summary>
+            Starts the application
+            </summary>
+        </member>
+        <member name="M:API.App_Start.NinjectWebCommon.Stop">
+            <summary>
+            Stops the application.
+            </summary>
+        </member>
+        <member name="M:API.App_Start.NinjectWebCommon.CreateKernel">
+            <summary>
+            Creates the kernel that will manage your application.
+            </summary>
+            <returns>The created kernel.</returns>
+        </member>
+        <member name="M:API.App_Start.NinjectWebCommon.RegisterServices(Ninject.IKernel)">
+            <summary>
+            Load your modules or register your services here!
+            </summary>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,API.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:API.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:API.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(API.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:API.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},API.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:API.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:API.Common.RESTAuthorizeAttribute">
+            <summary>
+            Аффтаризовывает пользователя по токену в http-заголовке «Authorization»
+            </summary>
+        </member>
+        <member name="M:API.Common.RESTAuthorizeAttribute.#ctor">
+            <summary>
+            Позволяет заходить всем зарегистрированным пользователям
+            </summary>
+        </member>
+        <member name="M:API.Common.RESTAuthorizeAttribute.#ctor(System.String[])">
+            <summary>
+            Аффтаризация. Принимает массив ролей в строках
+            </summary>
+            <param name="roles"></param>
+        </member>
+        <member name="M:API.Common.RESTAuthorizeAttribute.#ctor(API.Models.Role[])">
+            <summary>
+            /// Аффтаризация. Принимает массив ролей в енумах
+            </summary>
+            <param name="roles"></param>
+        </member>
+        <member name="M:API.Common.RESTAuthorizeAttribute.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Вызывается каждый раз при поступлении запроса
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:API.Common.RESTAuthorizeAttribute.Dispose">
+            <summary>
+            Убивает связанные ресурсы
+            </summary>
+        </member>
+        <member name="M:API.Common.Security.GenerateToken">
+            <summary>
+            Генерит случайный токен по алгоритму SHA256
+            </summary>
+            <returns>Хэш-строка, длиной 64 символа</returns>
+        </member>
+        <member name="T:API.Common.ValidateModelAttribute">
+            <summary>
+            Проверяет ошибки в ModelState и выдаёт их в response
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ICrudController.Get(System.Int32)">
+            <summary>
+            Получает сущность по её Id
+            </summary>
+            <param name="id">Id сущности</param>
+        </member>
+        <member name="M:API.Controllers.ICrudController.Put(System.Int32,System.Object)">
+            <summary>
+            Сохраняет объект
+            </summary>
+            <param name="id">Id редактируемого объекта</param>
+            <param name="putViewModel"></param>
+        </member>
+        <member name="M:API.Controllers.ICrudController.Post(System.Object)">
+            <summary>
+            Сохраняет объект
+            </summary>
+            <param name="postViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ICrudController.Delete(System.Int32)">
+            <summary>
+            Удаляет объект
+            </summary>
+            <param name="id">ID удаляемого объекта</param>
+        </member>
+        <member name="T:API.Controllers.PictureController">
+            <summary>
+            Работа с картинками
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PictureController.GetAsync(System.Int32)">
+            <summary>
+            Получает файл картинки
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PictureController.GetInfo(System.Int32)">
+            <summary>
+            Получение информации о картинке
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PictureController.GetByActivityAsync(System.Int32)">
+            <summary>
+            Получает картинки по активности
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PictureController.GetByOrganizerAsync(System.Int32)">
+            <summary>
+            Получает картинки организатора
+            </summary>
+        </member>
+        <member name="T:API.Controllers.TempFileController">
+            <summary>
+            Работа с временными файлами. Сначала картинки загружаются как временные файлы с уникальным FormId.
+            Затем после сохранения формы они сохраняются как картинки в Picture.
+            </summary>
+        </member>
+        <member name="M:API.Controllers.TempFileController.Get(System.Int32)">
+            <summary>
+            Получение картинки
+            </summary>
+        </member>
+        <member name="M:API.Controllers.TempFileController.GetInfo(System.Int32)">
+            <summary>
+            Получение информации о временном файле
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.TempFileController.Post(API.ViewModels.TempFileViewModelPost)">
+            <summary>
+            Добавление временного файла
+            </summary>
+        </member>
+        <member name="M:API.Controllers.TempFileController.Delete(System.Int32)">
+            <summary>
+            Удаление
+            </summary>
+        </member>
+        <member name="M:API.Controllers.TempFileController.GetByFormId(System.String)">
+            <summary>
+            Получение всех временных файлов по FormId
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Controllers.UserController">
+            <summary>
+            Управление пользователями
+            </summary>
+        </member>
+        <member name="M:API.Controllers.UserController.Get(System.String)">
+            <summary>
+            Получает пользователя по его email
+            </summary>
+            <param name="email"></param>
+        </member>
+        <member name="M:API.Controllers.UserController.Put(System.String,API.ViewModels.UserViewModelPut)">
+            <summary>
+            Обновляет данные пользователя
+            </summary>
+            <param name="email"></param>
+            <param name="putViewModel"></param>
+        </member>
+        <member name="M:API.Controllers.UserController.Delete(System.String)">
+            <summary>
+            Удаляет пользователя
+            </summary>
+            <param name="email"></param>
+        </member>
+        <member name="M:API.Controllers.UserController.Register(API.ViewModels.UserRegisterViewModel)">
+            <summary>
+            Регистрирует пользователя
+            </summary>
+            <param name="viewModel"></param>
+        </member>
+        <member name="M:API.Controllers.UserController.GetMe">
+            <summary>
+            Получает данные пользователя по его токену в заголовке
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserController.Search(System.Collections.Generic.List{API.Models.Role},System.String,System.Int32)">
+            <summary>
+            Ищет пользователей по электропочте, имени или номеру телефона.
+            </summary>
+            <param name="roles">Роли списком. Например: roles=0&amp;roles=2</param>
+            <param name="cityId">Id города</param>
+            <param name="word">Поисковое слово. Можно не передавать, тогда выдаст всех</param>
+            <param name="page">Номер страницы для постраничной навигации. По-умолчанию — 1</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.UserController.Logout">
+            <summary>
+            Выход пользователя со всех устройств. Убивает предыдущий токен и создаёт новый. 
+            Чтобы получить новый токен нужно вызвать метод Register
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.CityViewModelGet">
+            <summary>
+            Город
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CityViewModelGet.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CityViewModelGet.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.CityViewModelPost">
+            <summary>
+            Город
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CityViewModelPost.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.PictureViewModelGet">
+            <summary>
+            Картинка
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelGet.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelGet.Filename">
+            <summary>
+            Имя файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelGet.IsMain">
+            <summary>
+            Главная картинка объекта
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelGet.LinkedObjectId">
+            <summary>
+            Ссылка на объект
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelGet.LinkedObjectType">
+            <summary>
+            Тип объекта
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.PictureViewModelShortGet">
+            <summary>
+            Картинка
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelShortGet.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelShortGet.Url">
+            <summary>
+            УРЛ с картинкой
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PictureViewModelShortGet.IsMain">
+            <summary>
+            Картинка главная для объекта
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.TempFileViewModelGet">
+            <summary>
+            Временный файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelGet.Id">
+            <summary>
+            ID файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelGet.FormId">
+            <summary>
+            Id формы, на которой закачали файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelGet.Filename">
+            <summary>
+            Имя файла с расширением
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelGet.Url">
+            <summary>
+            УРЛ, по которому можно скачать файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelGet.IsMain">
+            <summary>
+            Является главной картинкой для активности
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.TempFileViewModelPost">
+            <summary>
+            Временный файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelPost.FormId">
+            <summary>
+            Id формы, на которой закачали файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelPost.Filename">
+            <summary>
+            Имя файла с расширением
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelPost.Data">
+            <summary>
+            Двоичные данные файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.TempFileViewModelPost.IsMain">
+            <summary>
+            Является главной картинкой
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.UserViewModelGet">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelGet.Email">
+            <summary>
+            Электропочта
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelGet.Name">
+            <summary>
+            Человеческое имя
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelGet.Phone">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelGet.Picture">
+            <summary>
+            Аватарка
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelGet.RoleName">
+            <summary>
+            Название роли
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.UserViewModelPut">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelPut.Name">
+            <summary>
+            Человеческое имя
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelPut.Phone">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelPut.Role">
+            <summary>
+            Роль
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelPut.FormId">
+            <summary>
+            ID формы. По этому идентификатору связываются временные файлы
+            с активностями. После сохранения активности, все TempFile с указанным FormId
+            превратятся в Picture и привяжутся в данной активности.
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.UserRegisterViewModel">
+            <summary>
+            Регистрация или аутентификация
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserRegisterViewModel.Email">
+            <summary>
+            Почта пользователя
+            </summary>
+        </member>
+    </members>
+</doc>
