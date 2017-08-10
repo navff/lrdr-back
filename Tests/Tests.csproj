@@ -116,6 +116,7 @@
   <ItemGroup>
     <Compile Include="BaseControllerTest.cs" />
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Controllers\OrderControllerTest.cs" />
     <Compile Include="Helpers\TestHelpers.cs" />
     <Compile Include="InMemoryHttpContentSerializationHandler.cs" />
     <Compile Include="Operations\UsersOperationsTest.cs" />

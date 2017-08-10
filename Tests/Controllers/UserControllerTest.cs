@@ -28,12 +28,9 @@ namespace Tests.Controllers
     [TestClass]
     public class UserControllerTest : BaseControllerTest
     {
-        private UserController _controller;
 
         public UserControllerTest()
         {
-            UserOperations userOperations = new UserOperations(_context);
-            _controller = new UserController(userOperations);
             MapperMappings.Map();
         }
 

@@ -30,7 +30,7 @@ namespace Tests
 {
    public abstract class BaseControllerTest : BaseTest
     {
-        private string baseAddress = "http://localhost:3105/";
+        private string baseAddress = "http://localhost:3106/";
         private Logger _logger;
 
         public BaseControllerTest()

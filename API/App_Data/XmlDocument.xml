@@ -594,6 +594,41 @@
             </summary>
             <param name="id">ID удаляемого объекта</param>
         </member>
+        <member name="M:API.Controllers.OrderController.Get(System.String)">
+            <summary>
+            Получает конкретный заказ
+            </summary>
+        </member>
+        <member name="M:API.Controllers.OrderController.Search(API.ViewModels.SearchOrderViewModelGet)">
+            <summary>
+            Все заказы для текузего пользователя
+            </summary>
+        </member>
+        <member name="M:API.Controllers.OrderController.Put(System.Int32,API.ViewModels.OrderViewModelPost)">
+            <summary>
+            Изменение заказа
+            </summary>
+        </member>
+        <member name="M:API.Controllers.OrderController.Post(System.Object)">
+            <summary>
+            Добавление нового заказа
+            </summary>
+        </member>
+        <member name="M:API.Controllers.OrderController.Delete(System.Int32)">
+            <summary>
+            Удаление заказа
+            </summary>
+        </member>
+        <member name="M:API.Controllers.OrderController.ChangePrice(API.ViewModels.OrderChangePriceViewModelPost)">
+            <summary>
+            Обновление цены для заказа
+            </summary>
+        </member>
+        <member name="M:API.Controllers.OrderController.ChangeStatus(API.ViewModels.OrderChangeStatusViewModelPost)">
+            <summary>
+            Обновление статуса заказа
+            </summary>
+        </member>
         <member name="T:API.Controllers.UserController">
             <summary>
             Управление пользователями
@@ -644,6 +679,188 @@
             <summary>
             Выход пользователя со всех устройств. Убивает предыдущий токен и создаёт новый. 
             Чтобы получить новый токен нужно вызвать метод Register
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.Code">
+            <summary>
+            GUID-код, который будет в адресной строке
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.OwnerUserId">
+            <summary>
+            Id пользователя, который создал заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.OwnerUser">
+            <summary>
+            Пользователь, который создал заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.Name">
+            <summary>
+            Название заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.Deadline">
+            <summary>
+            Дэдлайн заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.CustomerUserId">
+            <summary>
+            Id клиента, для которого делается заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.CustomerUser">
+            <summary>
+            Клиент для которого делается заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.Created">
+            <summary>
+            Время создания заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.Price">
+            <summary>
+            Стоимость заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.Status">
+            <summary>
+            Статус
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.DeliveryAddress">
+            <summary>
+            Адрес, по которому доставить (если нужно)
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.ShowPayment">
+            <summary>
+            Показывать контрагенту возможность оплаты или нет. Будут случаи, когда заказ я 
+            создаю не как исполнитель, а как заказчик. Тогда возможность оплаты не нужна
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.IsDeleted">
+            <summary>
+            Удалён в корзину
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.Code">
+            <summary>
+            GUID-код, который будет в адресной строке
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.OwnerUserId">
+            <summary>
+            Id пользователя, который исполняет заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.OwnerUser">
+            <summary>
+            Пользователь, который создал заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.Name">
+            <summary>
+            Название заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.Deadline">
+            <summary>
+            Дэдлайн заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.CustomerUserId">
+            <summary>
+            Id клиента, для которого делается заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.CustomerUser">
+            <summary>
+            Клиент для которого делается заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.Created">
+            <summary>
+            Время создания заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.Price">
+            <summary>
+            Стоимость заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.Status">
+            <summary>
+            Статус
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.IsDeleted">
+            <summary>
+            Удалён в корзину
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelPost.OwnerUserId">
+            <summary>
+            Id пользователя, который исполняет заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelPost.Name">
+            <summary>
+            Название заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelPost.Deadline">
+            <summary>
+            Дэдлайн заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelPost.CustomerUserId">
+            <summary>
+            Id клиента, для которого делается заказ
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelPost.Created">
+            <summary>
+            Время создания заказа
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelPost.IsDeleted">
+            <summary>
+            Удалён в корзину
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.PageView`1">
+            <summary>
+            Отображение результатов выборки с постраничной навигацией и сортировкой
+            </summary>
+            <typeparam name="T">Тип результата выборки</typeparam>
+        </member>
+        <member name="P:API.ViewModels.PageView`1.Content">
+            <summary>
+            Результаты выборки
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PageView`1.Total">
+            <summary>
+            Общее количество найденных элементов
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PageView`1.PageNumber">
+            <summary>
+            Номер текущей страницы пейджинга
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PageView`1.TotalPages">
+            <summary>
+            Общее количество страниц пейджинга
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PageView`1.SortBy">
+            <summary>
+            Поле, по которому выдана сортировка
             </summary>
         </member>
         <member name="T:API.ViewModels.UserViewModelGet">

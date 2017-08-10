@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
+using System.Web.Http.Description;
+using API.Common;
+using API.ViewModels;
+
+namespace API.Controllers
+{
+    [RoutePrefix("api/order")]
+    public class OrderController: ApiController
+    {
+        /// <summary>
+        /// Получает конкретный заказ
+        /// </summary>
+        [HttpGet]
+        [Route("{code}")]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> Get(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Все заказы для текузего пользователя
+        /// </summary>
+        [HttpGet]
+        [ResponseType(typeof(PageView<OrderShortViewModelGet>))]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> Search([FromUri] SearchOrderViewModelGet searchViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Изменение заказа
+        /// </summary>
+        [HttpPut]
+        [Route("{id}")]
+        [ResponseType(typeof(OrderViewModelGet))]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> Put(int id, OrderViewModelPost putViewModel)
+        {
+            throw new NotImplementedException();
+            //TODO: проверить права на ордер
+        }
+
+        /// <summary>
+        /// Добавление нового заказа
+        /// </summary>
+        [HttpPost]
+        [ResponseType(typeof(OrderViewModelGet))]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> Post(object postViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Удаление заказа
+        /// </summary>
+        [HttpDelete]
+        [Route("{id}")]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            throw new NotImplementedException();
+            //TODO: проверить права на ордер
+        }
+
+        /// <summary>
+        /// Обновление цены для заказа
+        /// </summary>
+        [Route("changeprice")]
+        [HttpPut]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> ChangePrice([FromBody] OrderChangePriceViewModelPost orderChangePriceViewModel)
+        {
+            throw new NotImplementedException();
+            // TODO: проверить права на ордер
+        }
+
+        /// <summary>
+        /// Обновление статуса заказа
+        /// </summary>
+        [Route("changestatus")]
+        [HttpPut]
+        [RESTAuthorize]
+        public async Task<IHttpActionResult> ChangeStatus([FromBody] OrderChangeStatusViewModelPost orderChangeStatusViewModel)
+        {
+            throw new NotImplementedException();
+            // TODO: проверить права на ордер
+        }
+    }
+}
