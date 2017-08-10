@@ -16,7 +16,6 @@ using AutoMapper;
 using Camps.Tools;
 using Models;
 using Models.Entities;
-using Models.Operations;
 
 namespace API.Controllers
 {
@@ -27,12 +26,10 @@ namespace API.Controllers
     public class UserController : ApiController
     {
         private readonly UserOperations _userOperations;
-        private readonly PictureOperations _pictureOperations;
 
-        public UserController(UserOperations userOperations, PictureOperations pictureOperations)
+        public UserController(UserOperations userOperations)
         {
             _userOperations = userOperations;
-            _pictureOperations = pictureOperations;
         }
 
         /// <summary>
@@ -53,12 +50,12 @@ namespace API.Controllers
                 }
                 var result = Mapper.Map<UserViewModelGet>(entity);
                 result.RoleName = entity.Role.ToString();
-                var pic = (await _pictureOperations.GetByLinkedObject(LinkedObjectType.User, entity.Id)).FirstOrDefault();
+                /*var pic = (await _pictureOperations.GetByLinkedObject(LinkedObjectType.User, entity.Id)).FirstOrDefault();
                 result.Picture = Mapper.Map<PictureViewModelGet>(pic);
                 if (result.Picture != null)
                 {
                     result.Picture.Url = Url.Content($"~/api/picture/{result.Picture.Id}");
-                }
+                }*/
                 return Ok(result);
             }
             catch (Exception e)
@@ -97,7 +94,6 @@ namespace API.Controllers
 
             userEntity.Id = userId.Value;
             userEntity = await _userOperations.UpdateAsync(userEntity);
-            await _pictureOperations.SaveByFormIdAsync(putViewModel.FormId, userEntity.Id, LinkedObjectType.User);
             return await Get(userEntity.Email);
         }
 

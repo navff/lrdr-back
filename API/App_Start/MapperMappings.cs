@@ -21,16 +21,11 @@ namespace API
                 // Model to ViewModels
                 cfg.CreateMap<User, UserViewModelPut>();
                 cfg.CreateMap<User, UserViewModelGet>();
-                cfg.CreateMap<Picture, PictureViewModelGet>();
-                cfg.CreateMap<Picture, PictureViewModelShortGet>();
-                cfg.CreateMap<TempFile, TempFileViewModelGet>();
 
 
 
                 // ViewModels to Models
                 cfg.CreateMap<UserViewModelPut, User>();
-                cfg.CreateMap<PictureViewModelGet, Picture>();
-                cfg.CreateMap<TempFileViewModelPost, TempFile>();
             });
         }
     }

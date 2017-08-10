@@ -44,13 +44,22 @@ namespace Models
         }
 
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Picture> Pictures { get; set; }
-        public virtual DbSet<TempFile> TempFiles { get; set; }
-
+        public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasMany(u => u.OrdersAsCustomer)
+                .WithRequired()
+                .HasForeignKey(u => u.CustomerUserId)
+                .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>().HasMany(u => u.OrdersAsOwner)
+                .WithRequired()
+                .HasForeignKey(u => u.OwnerUserId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

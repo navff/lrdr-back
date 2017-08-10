@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using API.Models;
 using Camps.Tools;
 using Models;
-using Models.Operations;
 using Models.Tools;
 
 namespace API.Operations
@@ -48,14 +47,14 @@ namespace API.Operations
         public async Task<User> GetAsync(string email)
         {
             return await _context.Users
-                                 .Include(u => u.Picture)
+                                 .Include(u => u.AvatarFile)
                                  .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<User> GetAsync(int id)
         {
             return await _context.Users
-                                 .Include(u => u.Picture)
+                                 .Include(u => u.AvatarFile)
                                  .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -71,7 +70,7 @@ namespace API.Operations
 
             userInDb.Name = user.Name;
             userInDb.Phone = user.Phone;
-            userInDb.PictureId = user.PictureId;
+            userInDb.AvatarFileId = user.AvatarFileId;
             userInDb.Role = user.Role;
             userInDb.Email = user.Email;
 

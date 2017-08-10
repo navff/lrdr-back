@@ -33,7 +33,7 @@ namespace API.ViewModels
         /// <summary>
         /// Аватарка
         /// </summary>
-        public virtual PictureViewModelGet Picture { get; set; }
+       // public virtual FileViewModelGet AvatarFile { get; set; }
 
         /// <summary>
         /// Название роли

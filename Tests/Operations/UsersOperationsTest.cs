@@ -3,6 +3,7 @@ using System.Linq;
 using API.Models;
 using API.Operations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Models.Entities;
 
 namespace Tests.Operations
 {
@@ -70,16 +71,16 @@ namespace Tests.Operations
         [TestMethod]
         public void Add_Ok_Test()
         {
-            var picture = _context.Pictures.First();
 
             var randomString = Guid.NewGuid().ToString();
+            var file = _context.Files.First(f => f.LinkedObjectType == LinkedObjectType.User);
             var user = new User
             {
                 Name = randomString,
                 Phone = randomString,
                 Email = randomString + "@33kita.ru",
                 AuthToken = randomString,
-                PictureId = picture.Id,
+                AvatarFileId = file.Id,
                 Role = Role.RegisteredUser,
                 DateRegistered = DateTime.Now
             };

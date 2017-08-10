@@ -19,7 +19,6 @@ using API.Models;
 using API.Operations;
 using API.ViewModels;
 using Models;
-using Models.Operations;
 using Ninject.Web.Common;
 using NLog;
 using Tests.Helpers;
@@ -34,8 +33,7 @@ namespace Tests.Controllers
         public UserControllerTest()
         {
             UserOperations userOperations = new UserOperations(_context);
-            PictureOperations pictureOperations = new PictureOperations(_context);
-            _controller = new UserController(userOperations, pictureOperations);
+            _controller = new UserController(userOperations);
             MapperMappings.Map();
         }
 
@@ -79,17 +77,6 @@ namespace Tests.Controllers
             var result = HttpGet<IEnumerable<UserViewModelGet>>("api/user/search?word=idbdjdjdd93hbhsbishjs", user.AuthToken);
             Assert.IsFalse(result.Any());
         }
-
-
-
-        [TestMethod]
-        public void HTTP_SearchByCity_WrongId_Test()
-        {
-            var user = _context.Users.First(u => u.Role == Role.PortalAdmin);
-            var result = HttpGet<IEnumerable<UserViewModelGet>>($"api/user/search?cityId=99999", user.AuthToken);
-            Assert.IsFalse(result.Any());
-        }
-
 
         [TestMethod]
         public void HTTP_Delete_OK_Test()

@@ -33,15 +33,26 @@ namespace API.Models
         [StringLength(255)]
         public string Phone { get; set; }
 
-        [ForeignKey("Picture")]
-        public int? PictureId { get; set; }
-
-        public virtual Picture Picture { get; set; }
+        [ForeignKey("AvatarFile")]
+        public int? AvatarFileId { get; set; }
+        public virtual File AvatarFile { get; set; }
 
         public Role Role { get; set; }
 
         [Required]
-        public DateTime DateRegistered { get; set; }
+        public DateTimeOffset DateRegistered { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
+        [InverseProperty("OwnerUser")]
+        public virtual ICollection<Order> OrdersAsOwner { get; set; }
+
+        [InverseProperty("CustomerUser")]
+        public virtual ICollection<Order> OrdersAsCustomer { get; set; }
+
+        
     }
 
     public enum Role
