@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,14 @@ namespace Models.Entities
     public class Order
     {
         public int Id { get; set; }
+
+        /// <summary>
+        /// GUID-код, который будет в адресной строке
+        /// </summary>
+        [Required]
+        [Index(IsUnique = true)]
+        [StringLength(maximumLength: 255, MinimumLength = 1)]
+        public string Code { get; set; }
 
         public int OwnerUserId { get; set; }
         [ForeignKey("OwnerUserId")]

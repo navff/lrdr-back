@@ -100,7 +100,8 @@ namespace Models
                     OwnerUserId = context.Users.First().Id,
                     Price = 50,
                     ShowPayment = true,
-                    Status = OrderStatus.Created
+                    Status = OrderStatus.Created,
+                    Code = Guid.NewGuid().ToString()
                 });
 
                 context.Orders.Add(new Order
@@ -114,7 +115,8 @@ namespace Models
                     OwnerUserId = context.Users.First().Id,
                     Price = 500,
                     ShowPayment = false,
-                    Status = OrderStatus.Created
+                    Status = OrderStatus.Created,
+                    Code = Guid.NewGuid().ToString()
                 });
 
                 context.SaveChanges();

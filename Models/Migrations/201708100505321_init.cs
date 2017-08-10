@@ -28,6 +28,7 @@ namespace Models.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Code = c.String(nullable: false, maxLength: 255),
                         OwnerUserId = c.Int(nullable: false),
                         Name = c.String(),
                         Deadline = c.DateTimeOffset(nullable: false, precision: 7),
@@ -42,6 +43,7 @@ namespace Models.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.CustomerUserId)
                 .ForeignKey("dbo.Users", t => t.OwnerUserId)
+                .Index(t => t.Code, unique: true)
                 .Index(t => t.OwnerUserId)
                 .Index(t => t.CustomerUserId);
             
@@ -114,6 +116,7 @@ namespace Models.Migrations
             DropIndex("dbo.Users", new[] { "Email" });
             DropIndex("dbo.Orders", new[] { "CustomerUserId" });
             DropIndex("dbo.Orders", new[] { "OwnerUserId" });
+            DropIndex("dbo.Orders", new[] { "Code" });
             DropIndex("dbo.Comments", new[] { "OrderId" });
             DropIndex("dbo.Comments", new[] { "UserId" });
             DropTable("dbo.Payments");
