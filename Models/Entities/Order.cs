@@ -34,6 +34,8 @@ namespace Models.Entities
 
         public DateTimeOffset Created { get; set; }
 
+        public DateTimeOffset Updated { get; set; }
+
         public Decimal Price { get; set; }
 
         public OrderStatus Status { get; set; }

@@ -34,6 +34,7 @@ namespace Models.Migrations
                         Deadline = c.DateTimeOffset(nullable: false, precision: 7),
                         CustomerUserId = c.Int(nullable: false),
                         Created = c.DateTimeOffset(nullable: false, precision: 7),
+                        Updated = c.DateTimeOffset(nullable: false, precision: 7),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Status = c.Int(nullable: false),
                         DeliveryAddress = c.String(),

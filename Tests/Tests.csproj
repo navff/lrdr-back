@@ -119,6 +119,7 @@
     <Compile Include="Controllers\OrderControllerTest.cs" />
     <Compile Include="Helpers\TestHelpers.cs" />
     <Compile Include="InMemoryHttpContentSerializationHandler.cs" />
+    <Compile Include="Operations\OrderOperationsTest.cs" />
     <Compile Include="Operations\UsersOperationsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\UserControllerTest.cs" />
