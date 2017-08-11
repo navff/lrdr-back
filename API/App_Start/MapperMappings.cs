@@ -3,6 +3,7 @@ using API.Models;
 using API.ViewModels;
 using AutoMapper;
 using Models.Entities;
+using Models.Operations;
 
 namespace API
 {
@@ -21,7 +22,8 @@ namespace API
                 // Model to ViewModels
                 cfg.CreateMap<User, UserViewModelPut>();
                 cfg.CreateMap<User, UserViewModelGet>();
-
+                cfg.CreateMap<PageViewDTO<Order>, PageView<OrderShortViewModelGet>>();
+                cfg.CreateMap<Order, OrderShortViewModelGet>();
 
 
                 // ViewModels to Models

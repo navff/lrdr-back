@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using Models.Operations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace API.ViewModels
+namespace Models.Operations
 {
-    /// <summary>
-    /// Отображение результатов выборки с постраничной навигацией и сортировкой
-    /// </summary>
-    /// <typeparam name="T">Тип результата выборки</typeparam>
-    public class PageView<T>
+    public class PageViewDTO<T>
     {
         /// <summary>
         /// Результаты выборки
         /// </summary>
-        public  IEnumerable<T> Content { get; set; }
+        public IEnumerable<T> Content { get; set; }
 
         /// <summary>
         /// Общее количество найденных элементов
@@ -32,12 +31,6 @@ namespace API.ViewModels
         /// <summary>
         /// Поле, по которому выдана сортировка
         /// </summary>
-        public string SortBy { get; set; }
-    }
-
-    public abstract class PagewViewRequest
-    {
-        public int Page { get; set; } = 1;
-        public OrderSorting SortBy { get; set; } = OrderSorting.Updated;
+        public OrderSorting SortBy { get; set; }
     }
 }

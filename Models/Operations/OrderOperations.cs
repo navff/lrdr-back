@@ -48,13 +48,15 @@ namespace Models.Operations
             }
         }
 
-        public async Task<IEnumerable<Order>> SearchAsync(string word="", int? userId=null, 
+        public async Task<PageViewDTO<Order>> SearchAsync(string word="", int? userId=null, 
                                                           OrderSorting sortby=OrderSorting.Updated, 
                                                           int page=1)
         {
             try
             {
-                var query = _context.Orders.AsQueryable();
+                var query = _context.Orders.Include(o => o.CustomerUser)
+                                           .Include(o => o.OwnerUser)
+                                           .AsQueryable();
 
                 if (!String.IsNullOrEmpty(word))
                 {
@@ -88,11 +90,24 @@ namespace Models.Operations
                     case OrderSorting.Owner:
                         query = query.OrderBy(o => o.OwnerUser.Name);
                         break;
+                    default:
+                        query = query.OrderBy(o => o.Updated);
+                        break;
                 }
 
-                return await query.Skip(ModelsSettings.PAGE_SIZE * (page - 1))
+                var total = query.Count();
+                var result=  await query.Skip(ModelsSettings.PAGE_SIZE * (page - 1))
                     .Take(ModelsSettings.PAGE_SIZE)
                     .ToListAsync();
+                return new PageViewDTO<Order>
+                {
+                    Content = result,
+                    PageNumber = page,
+                    SortBy = sortby,
+                    Total = total,
+                    TotalPages = (int)Math.Ceiling((double)total / (double)ModelsSettings.PAGE_SIZE)
+                };
+
             }
             catch (Exception e)
             {

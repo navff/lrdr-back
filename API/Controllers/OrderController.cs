@@ -6,13 +6,26 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using API.Common;
+using API.Operations;
 using API.ViewModels;
+using AutoMapper;
+using Models.Operations;
 
 namespace API.Controllers
 {
     [RoutePrefix("api/order")]
     public class OrderController: ApiController
     {
+        private OrderOperations _orderOperations;
+        private UserOperations _userOperations;
+
+        public OrderController(OrderOperations orderOperations, UserOperations userOperations)
+        {
+            _orderOperations = orderOperations;
+            _userOperations = userOperations;
+        }
+
+
         /// <summary>
         /// Получает конкретный заказ
         /// </summary>
@@ -30,9 +43,14 @@ namespace API.Controllers
         [HttpGet]
         [ResponseType(typeof(PageView<OrderShortViewModelGet>))]
         [RESTAuthorize]
+        [Route("search")]
         public async Task<IHttpActionResult> Search([FromUri] SearchOrderViewModelGet searchViewModel)
         {
-            throw new NotImplementedException();
+            if (searchViewModel == null) searchViewModel = new SearchOrderViewModelGet();
+            var dto = await _orderOperations.SearchAsync(searchViewModel.Word, searchViewModel.userId,
+                searchViewModel.SortBy, searchViewModel.Page);
+            var result = Mapper.Map<PageView<OrderShortViewModelGet>>(dto);
+            return Ok(result);
         }
 
         /// <summary>

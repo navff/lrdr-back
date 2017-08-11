@@ -191,8 +191,8 @@ namespace API.ViewModels
 
     public class SearchOrderViewModelGet : PagewViewRequest
     {
-        public string Word { get; set; }
-        public int userId { get; set; }
+        public string Word { get; set; } = null;
+        public int? userId { get; set; } = null;
     }
 
 }

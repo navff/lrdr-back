@@ -41,7 +41,7 @@ namespace Tests.Operations
         {
             var order = _context.Orders.First();
             var result = _orderOperations.SearchAsync(order.Name.Substring(2)).Result;
-            Assert.IsTrue(result.Any());
+            Assert.IsTrue(result.Content.Any());
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace Tests.Operations
         {
             var order = _context.Orders.First();
             var result = _orderOperations.SearchAsync("94nb8ends934n3jwndskjh348").Result;
-            Assert.IsFalse(result.Any());
+            Assert.IsFalse(result.Content.Any());
         }
 
         [TestMethod]
