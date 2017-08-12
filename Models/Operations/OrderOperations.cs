@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Models;
 using Camps.Tools;
 using Models.Entities;
 using Models.Tools;
@@ -64,6 +65,8 @@ namespace Models.Operations
                                             || (o.Code.ToLower().Contains(word.ToLower()))
                                             || (o.CustomerUser.Email.ToLower().Contains(word.ToLower()))
                                             || (o.CustomerUser.Name.ToLower().Contains(word.ToLower()))
+                                            || (o.OwnerUser.Email.ToLower().Contains(word.ToLower()))
+                                            || (o.OwnerUser.Name.ToLower().Contains(word.ToLower()))
                                              );
                 }
 
@@ -121,17 +124,17 @@ namespace Models.Operations
             try
             {
                 var oldOrder = await GetAsync(order.Id);
-                oldOrder.Code = order.Code;
+                //oldOrder.Code = order.Code;
                 oldOrder.Created = order.Created;
                 oldOrder.CustomerUserId = order.CustomerUserId;
                 oldOrder.Deadline = order.Deadline;
                 oldOrder.OwnerUserId = order.OwnerUserId;
-                oldOrder.Updated = order.Updated;
+                oldOrder.Updated = DateTimeOffset.Now;
                 oldOrder.DeliveryAddress = order.DeliveryAddress;
                 oldOrder.IsDeleted = order.IsDeleted;
                 oldOrder.Name = order.Name;
-                oldOrder.Price = order.Price;
-                oldOrder.Status = order.Status;
+                //oldOrder.Price = order.Price;
+                //oldOrder.Status = order.Status;
                 oldOrder.ShowPayment = order.ShowPayment;
 
                 await _context.SaveChangesAsync();
@@ -149,6 +152,8 @@ namespace Models.Operations
             try
             {
                 order.Code = Guid.NewGuid().ToString();
+                order.Updated = DateTimeOffset.Now;
+                order.Created = DateTimeOffset.Now;
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
                 return order;
@@ -181,6 +186,7 @@ namespace Models.Operations
             {
                 var order = await GetAsync(orderId);
                 order.Price = newPrice;
+                order.Updated = DateTimeOffset.Now;
                 await _context.SaveChangesAsync();
                 return order;
 
@@ -198,6 +204,7 @@ namespace Models.Operations
             {
                 var order = await GetAsync(orderId);
                 order.Status = newStatus;
+                order.Updated = DateTimeOffset.Now;
                 await _context.SaveChangesAsync();
                 return order;
             }
@@ -206,6 +213,24 @@ namespace Models.Operations
                 ErrorLogger.Log("CANNOT CHANGE ORDER STATUS", e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Проверка прав на редактирование заказа. Заказ можно редактировать владельцу и админу
+        /// </summary>
+        public async Task<bool> CheckRights(int orderId, string userEmail)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == userEmail.ToLower());
+            if (user == null) return false;
+
+            var order = await GetAsync(orderId);
+            if (order == null)
+            {
+                throw new NotFoundException();
+            }
+
+            if ((order.OwnerUserId == user.Id) || (user.Role == Role.PortalAdmin) ) return true;
+            return false;
         }
 
     }

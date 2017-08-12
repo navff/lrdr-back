@@ -116,7 +116,6 @@ namespace Tests.Controllers
         [TestMethod]
         public void ChangeStatus_Ok_Test()
         {
-            var rndInt = DateTime.Now.Second;
             var order = _context.Orders.Take(10).ToList().Last();
             var user = _context.Users.First(u => u.Role == Role.PortalAdmin);
             var url = $"api/order/changestatus";
@@ -126,7 +125,7 @@ namespace Tests.Controllers
                 Status = OrderStatus.Payed
             };
             var result = HttpPut<OrderViewModelGet>(url, viewModel, user.AuthToken);
-            Assert.AreEqual(rndInt, result.Price);
+            Assert.AreEqual(OrderStatus.Payed, result.Status);
         }
     }
 }

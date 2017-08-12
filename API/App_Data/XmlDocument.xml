@@ -609,7 +609,7 @@
             Изменение заказа
             </summary>
         </member>
-        <member name="M:API.Controllers.OrderController.Post(System.Object)">
+        <member name="M:API.Controllers.OrderController.Post(API.ViewModels.OrderViewModelPost)">
             <summary>
             Добавление нового заказа
             </summary>

@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 using API.Common;
 using API.Operations;
 using API.ViewModels;
 using AutoMapper;
+using Models.Entities;
 using Models.Operations;
+using Models.Tools;
 
 namespace API.Controllers
 {
@@ -32,9 +35,13 @@ namespace API.Controllers
         [HttpGet]
         [Route("{code}")]
         [RESTAuthorize]
+        [ResponseType(typeof(OrderViewModelGet))]
         public async Task<IHttpActionResult> Get(string code)
         {
-            throw new NotImplementedException();
+            var order = await _orderOperations.GetAsync(code);
+            if (order == null) return this.Result404("This order is not found");
+            var result = Mapper.Map<OrderViewModelGet>(order);
+            return Ok(result);
         }
 
         /// <summary>
@@ -62,8 +69,20 @@ namespace API.Controllers
         [RESTAuthorize]
         public async Task<IHttpActionResult> Put(int id, OrderViewModelPost putViewModel)
         {
-            throw new NotImplementedException();
-            //TODO: проверить права на ордер
+            try
+            {
+                bool canEdit = await _orderOperations.CheckRights(id, User.Identity.Name);
+                if (!canEdit) return this.Result403("You have no rights to edit this order");
+            }
+            catch (NotFoundException ex)
+            {
+                return this.Result404("Order is not found");
+            }
+
+            var order = Mapper.Map<Order>(putViewModel);
+            order.Id = id;
+            order = await _orderOperations.UpdateAsync(order);
+            return await Get(order.Code);
         }
 
         /// <summary>
@@ -72,9 +91,11 @@ namespace API.Controllers
         [HttpPost]
         [ResponseType(typeof(OrderViewModelGet))]
         [RESTAuthorize]
-        public async Task<IHttpActionResult> Post(object postViewModel)
+        public async Task<IHttpActionResult> Post(OrderViewModelPost postViewModel)
         {
-            throw new NotImplementedException();
+            var order = Mapper.Map<Order>(postViewModel);
+            order = await _orderOperations.AddAsync(order);
+            return await Get(order.Code);
         }
 
 
@@ -86,8 +107,18 @@ namespace API.Controllers
         [RESTAuthorize]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
-            //TODO: проверить права на ордер
+            try
+            {
+                bool canEdit = await _orderOperations.CheckRights(id, User.Identity.Name);
+                if (!canEdit) return this.Result403("You have no rights to edit this order");
+            }
+            catch (NotFoundException ex)
+            {
+                return this.Result404("Order is not found");
+            }
+
+            await _orderOperations.DeleteAsync(id);
+            return Ok("Deleted");
         }
 
         /// <summary>
@@ -98,8 +129,19 @@ namespace API.Controllers
         [RESTAuthorize]
         public async Task<IHttpActionResult> ChangePrice([FromBody] OrderChangePriceViewModelPost orderChangePriceViewModel)
         {
-            throw new NotImplementedException();
-            // TODO: проверить права на ордер
+            try
+            {
+                bool canEdit = await _orderOperations.CheckRights(orderChangePriceViewModel.OrderId, User.Identity.Name);
+                if (!canEdit) return this.Result403("You have no rights to edit this order");
+            }
+            catch (NotFoundException ex)
+            {
+                return this.Result404("Order is not found");
+            }
+            
+
+            var result = await _orderOperations.ChangePriceAsync(orderChangePriceViewModel.OrderId, orderChangePriceViewModel.Price);
+            return await Get(result.Code);
         }
 
         /// <summary>
@@ -110,8 +152,19 @@ namespace API.Controllers
         [RESTAuthorize]
         public async Task<IHttpActionResult> ChangeStatus([FromBody] OrderChangeStatusViewModelPost orderChangeStatusViewModel)
         {
-            throw new NotImplementedException();
-            // TODO: проверить права на ордер
+            try
+            {
+                bool canEdit = await _orderOperations.CheckRights(orderChangeStatusViewModel.OrderId, User.Identity.Name);
+                if (!canEdit) return this.Result403("You have no rights to edit this order");
+            }
+            catch (NotFoundException ex)
+            {
+                return this.Result404("Order is not found");
+            }
+
+            var result = await _orderOperations.ChangeStatusAsync(orderChangeStatusViewModel.OrderId,
+                orderChangeStatusViewModel.Status);
+            return await Get(result.Code);
         }
     }
 }

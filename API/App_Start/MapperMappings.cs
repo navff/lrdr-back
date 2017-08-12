@@ -24,10 +24,12 @@ namespace API
                 cfg.CreateMap<User, UserViewModelGet>();
                 cfg.CreateMap<PageViewDTO<Order>, PageView<OrderShortViewModelGet>>();
                 cfg.CreateMap<Order, OrderShortViewModelGet>();
+                cfg.CreateMap<Order, OrderViewModelGet>();
 
 
                 // ViewModels to Models
                 cfg.CreateMap<UserViewModelPut, User>();
+                cfg.CreateMap<OrderViewModelPost, Order>();
             });
         }
     }

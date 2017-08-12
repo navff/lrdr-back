@@ -18,5 +18,13 @@ namespace API.Common
                 Content = new StringContent(message)
             });
         }
+
+        public static ResponseMessageResult Result403(this ApiController controller, string message)
+        {
+            return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.Forbidden)
+            {
+                Content = new StringContent(message)
+            });
+        }
     }
 }

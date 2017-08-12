@@ -96,6 +96,7 @@
     <Compile Include="Tools\Contracts.cs" />
     <Compile Include="Tools\EmailService.cs" />
     <Compile Include="Tools\ErrorLogger.cs" />
+    <Compile Include="Tools\NotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
