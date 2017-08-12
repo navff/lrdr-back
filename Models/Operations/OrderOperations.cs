@@ -233,6 +233,17 @@ namespace Models.Operations
             return false;
         }
 
+        public async Task UpdateUpdatedDate(int orderId)
+        {
+            var order = await GetAsync(orderId);
+            if (order == null)
+            {
+                throw new NotFoundException();
+            }
+            order.Updated = DateTimeOffset.Now;
+            await _context.SaveChangesAsync();
+        }
+
     }
 
     public enum OrderSorting

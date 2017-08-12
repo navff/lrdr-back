@@ -85,6 +85,7 @@
       <DependentUpon>201708110446048_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Operations\CommentOperations.cs" />
     <Compile Include="Operations\OrderOperations.cs" />
     <Compile Include="Operations\PageViewDTO.cs" />
     <Compile Include="Operations\UserOperations.cs" />
