@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Models;
 using Camps.Tools;
 using Models.Entities;
+using Models.Tools;
 
 namespace Models.Operations
 {
@@ -23,7 +26,9 @@ namespace Models.Operations
         {
             try
             {
-                throw new NotImplementedException();
+                var result = await _context.Comments.Include(c => c.User).FirstOrDefaultAsync(c => c.Id == id);
+                if (result == null) throw new NotFoundException();
+                return result;
             }
             catch (Exception ex)
             {
@@ -32,11 +37,26 @@ namespace Models.Operations
             }
         }
 
-        public async Task<PageViewDTO<Comment>> GetAllByOrder(int orderId)
+        public async Task<PageViewDTO<Comment>> GetAllByOrder(int orderId, int page=1)
         {
             try
             {
-                throw new NotImplementedException();
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+                if (order==null) throw new NotFoundException();
+
+                var comments = _context.Comments.Where(c => (c.OrderId == orderId))
+                    .Include(c => c.User)
+                    .OrderByDescending(c => c.Time);
+                var total = comments.Count();
+
+                return  new PageViewDTO<Comment>
+                {
+                    Content = await comments.ToListAsync(),
+                    PageNumber = page,
+                    SortBy = "Time",
+                    Total = total,
+                    TotalPages = (int)Math.Ceiling((double)total / (double)ModelsSettings.PAGE_SIZE)
+                };
             }
             catch (Exception ex)
             {
@@ -45,11 +65,26 @@ namespace Models.Operations
             }
         }
 
-        public async Task<PageViewDTO<Comment>> GetAllByUser(int orderId)
+        public async Task<PageViewDTO<Comment>> GetAllByUser(int userId, int page=1)
         {
             try
             {
-                throw new NotImplementedException();
+                var order = await _context.Users.FirstOrDefaultAsync(o => o.Id == userId);
+                if (order == null) throw new NotFoundException();
+
+                var comments = _context.Comments.Where(c => (c.UserId == userId))
+                    .Include(c => c.User)
+                    .OrderByDescending(c => c.Time);
+                var total = comments.Count();
+
+                return new PageViewDTO<Comment>
+                {
+                    Content = await comments.ToListAsync(),
+                    PageNumber = page,
+                    SortBy = "Time",
+                    Total = total,
+                    TotalPages = (int)Math.Ceiling((double)total / (double)ModelsSettings.PAGE_SIZE)
+                };
             }
             catch (Exception ex)
             {
@@ -62,8 +97,10 @@ namespace Models.Operations
         {
             try
             {
-                throw new NotImplementedException();
+                var result = _context.Comments.Add(comment);
                 await _orderOperations.UpdateUpdatedDate(comment.OrderId);
+                await _context.SaveChangesAsync();
+                return result;
             }
             catch (Exception ex)
             {
@@ -72,12 +109,18 @@ namespace Models.Operations
             }
         }
 
-        public async Task<Comment> UpdateAsync(Comment comment)
+        public async Task<Comment> UpdateAsync(int commentId, string commentText)
         {
             try
             {
-                throw new NotImplementedException();
-                await _orderOperations.UpdateUpdatedDate(comment.OrderId);
+                var oldComment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+                if (oldComment == null) throw new NotFoundException();
+
+                oldComment.Text = commentText;
+                await _context.SaveChangesAsync();
+                await _orderOperations.UpdateUpdatedDate(oldComment.OrderId);
+
+                return oldComment;
             }
             catch (Exception ex)
             {
@@ -86,12 +129,13 @@ namespace Models.Operations
             }
         }
 
-        public async Task<Comment> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             try
             {
-                throw new NotImplementedException();
                 var comment = await GetAsync(id);
+                _context.Comments.Remove(comment);
+                await _context.SaveChangesAsync();
                 await _orderOperations.UpdateUpdatedDate(comment.OrderId);
             }
             catch (Exception ex)
@@ -101,9 +145,16 @@ namespace Models.Operations
             }
         }
 
-        public async Task<bool> CheckRights(int commentId, int userId)
+        public async Task<bool> CheckRights(int commentId, string userEmail)
         {
-            throw new NotImplementedException();
+            var comment = await GetAsync(commentId);
+            var user = _context.Users.First(u => u.Email == userEmail);
+
+            if (comment.UserId == user.Id) return true;
+
+            if (user.Role == Role.PortalAdmin) return true;
+
+            return await _orderOperations.CheckRights(comment.OrderId, userEmail);
         }
     }
 }

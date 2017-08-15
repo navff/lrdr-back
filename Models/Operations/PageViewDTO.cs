@@ -31,6 +31,6 @@ namespace Models.Operations
         /// <summary>
         /// Поле, по которому выдана сортировка
         /// </summary>
-        public OrderSorting SortBy { get; set; }
+        public string SortBy { get; set; }
     }
 }

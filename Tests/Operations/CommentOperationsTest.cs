@@ -66,9 +66,8 @@ namespace Tests.Operations
         {
             var comment = _context.Comments.First();
             var rndString = Guid.NewGuid().ToString();
-            comment.Text = rndString;
-            var result = _commentOperations.UpdateAsync(comment).Result;
-            Assert.AreEqual(rndString, result);
+            var result = _commentOperations.UpdateAsync(comment.Id, rndString).Result;
+            Assert.AreEqual(rndString, result.Text);
         }
 
         [TestMethod]

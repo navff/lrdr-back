@@ -106,7 +106,7 @@ namespace Models.Operations
                 {
                     Content = result,
                     PageNumber = page,
-                    SortBy = sortby,
+                    SortBy = sortby.ToString(),
                     Total = total,
                     TotalPages = (int)Math.Ceiling((double)total / (double)ModelsSettings.PAGE_SIZE)
                 };

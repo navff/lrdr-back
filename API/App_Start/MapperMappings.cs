@@ -22,14 +22,19 @@ namespace API
                 // Model to ViewModels
                 cfg.CreateMap<User, UserViewModelPut>();
                 cfg.CreateMap<User, UserViewModelGet>();
+                cfg.CreateMap<User, UserViewModelShortGet>();
                 cfg.CreateMap<PageViewDTO<Order>, PageView<OrderShortViewModelGet>>();
                 cfg.CreateMap<Order, OrderShortViewModelGet>();
                 cfg.CreateMap<Order, OrderViewModelGet>();
+                cfg.CreateMap<PageViewDTO<Comment>, PageView<CommentViewModelGet>>();
+                cfg.CreateMap<Comment, CommentViewModelGet>();
 
 
                 // ViewModels to Models
                 cfg.CreateMap<UserViewModelPut, User>();
                 cfg.CreateMap<OrderViewModelPost, Order>();
+                cfg.CreateMap<CommentViewModelGet, Comment>();
+                cfg.CreateMap<PageView<CommentViewModelGet>, PageViewDTO<Comment>>();
             });
         }
     }

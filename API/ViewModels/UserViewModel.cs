@@ -42,6 +42,20 @@ namespace API.ViewModels
 
     }
 
+    public class UserViewModelShortGet
+    {
+        public int Id { get; set; }
+        /// <summary>
+        /// Электропочта
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Человеческое имя
+        /// </summary>
+        public string Name { get; set; }
+    }
+
     /// <summary>
     /// Пользователь
     /// </summary>

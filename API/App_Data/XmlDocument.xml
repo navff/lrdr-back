@@ -681,6 +681,41 @@
             Чтобы получить новый токен нужно вызвать метод Register
             </summary>
         </member>
+        <member name="P:API.ViewModels.CommentViewModelGet.Text">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelGet.Time">
+            <summary>
+            Время, когда коммент был оставлен
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelGet.OrderId">
+            <summary>
+            Заказ, к которому относится коммент
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelGet.User">
+            <summary>
+            Пользователь, который оставил коммент
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelPost.Text">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelPost.OrderId">
+            <summary>
+            Заказ, к которому относится коммент
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelPut.Text">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
         <member name="P:API.ViewModels.OrderViewModelGet.Code">
             <summary>
             GUID-код, который будет в адресной строке
@@ -886,6 +921,16 @@
         <member name="P:API.ViewModels.UserViewModelGet.RoleName">
             <summary>
             Название роли
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelShortGet.Email">
+            <summary>
+            Электропочта
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelShortGet.Name">
+            <summary>
+            Человеческое имя
             </summary>
         </member>
         <member name="T:API.ViewModels.UserViewModelPut">
