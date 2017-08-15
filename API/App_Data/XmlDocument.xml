@@ -568,6 +568,42 @@
             Проверяет ошибки в ModelState и выдаёт их в response
             </summary>
         </member>
+        <member name="M:API.Controllers.CommentController.Get(System.Int32)">
+            <summary>
+            Получает один конкретный коммент
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommentController.GetAllByOrder(System.Int32)">
+            <summary>
+            Получает все комменты к опреденённому заказу
+            </summary>
+            <param name="orderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CommentController.GetAllByUser(System.Int32)">
+            <summary>
+            Получает все комменты пользователя
+            </summary>
+        </member>
+        <member name="M:API.Controllers.CommentController.Put(System.Int32,API.ViewModels.CommentViewModelPut)">
+            <summary>
+            Обновляет текст коммента
+            </summary>
+        </member>
+        <member name="M:API.Controllers.CommentController.Post(API.ViewModels.CommentViewModelPost)">
+            <summary>
+            Добавляет коммент
+            </summary>
+        </member>
+        <member name="M:API.Controllers.CommentController.Delete(System.Int32)">
+            <summary>
+            Удаляет коммент
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:API.Controllers.ICrudController.Get(System.Int32)">
             <summary>
             Получает сущность по её Id
