@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using API.Common;
 using API.Operations;
 using API.ViewModels;
@@ -26,9 +27,15 @@ namespace API.Controllers
             _userOperations = userOperations;
         }
 
+        /// <summary>
+        /// Получает один конкретный коммент
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("{id}")]
         [HttpGet]
         [RESTAuthorize]
+        [ResponseType(typeof(CommentViewModelGet))]
         public async Task<IHttpActionResult> Get(int id)
         {
             try
@@ -43,9 +50,15 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Получает все комменты к опреденённому заказу
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         [Route("byorder/{orderId}")]
         [HttpGet]
         [RESTAuthorize]
+        [ResponseType(typeof(PageView<CommentViewModelGet>))]
         public async Task<IHttpActionResult> GetAllByOrder(int orderId)
         {
             try
@@ -60,9 +73,13 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Получает все комменты пользователя
+        /// </summary>
         [Route("byuser/{userId}")]
         [HttpGet]
         [RESTAuthorize]
+        [ResponseType(typeof(PageView<CommentViewModelGet>))]
         public async Task<IHttpActionResult> GetAllByUser(int userId)
         {
             try
@@ -76,10 +93,14 @@ namespace API.Controllers
                 return this.Result404("User is not found");
             }
         }
-
+        
+        /// <summary>
+        /// Обновляет текст коммента
+        /// </summary>
         [HttpPut]
         [Route("{id}")]
         [RESTAuthorize]
+        [ResponseType(typeof(CommentViewModelGet))]
         public async Task<IHttpActionResult> Put(int id, CommentViewModelPut putViewModel)
         {
             var canEdit = await _commentOperations.CheckRights(id, User.Identity.Name);
@@ -89,8 +110,13 @@ namespace API.Controllers
             return await Get(id);
         }
 
+
+        /// <summary>
+        /// Добавляет коммент
+        /// </summary>
         [HttpPost]
         [RESTAuthorize]
+        [ResponseType(typeof(CommentViewModelGet))]
         public async Task<IHttpActionResult> Post(CommentViewModelPost postViewModel)
         {
             var user = await _userOperations.GetAsync(User.Identity.Name);
@@ -104,6 +130,11 @@ namespace API.Controllers
             return await Get(result.Id);
         }
 
+        /// <summary>
+        /// Удаляет коммент
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [RESTAuthorize]
         [Route("{id}")]
