@@ -118,6 +118,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="Controllers\CommentControllerTest.cs" />
     <Compile Include="Controllers\OrderControllerTest.cs" />
+    <Compile Include="Controllers\PaymentControllerTest.cs" />
     <Compile Include="Helpers\TestHelpers.cs" />
     <Compile Include="InMemoryHttpContentSerializationHandler.cs" />
     <Compile Include="Operations\CommentOperationsTest.cs" />

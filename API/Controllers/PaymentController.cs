@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using API.Common;
 using API.Models;
+using API.ViewModels;
 
 namespace API.Controllers
 {
@@ -18,7 +20,9 @@ namespace API.Controllers
     public class PaymentController : ApiController
     {
         [HttpGet]
-        [RESTAuthorize()]
+        [RESTAuthorize]
+        [Route("{id}")]
+        [ResponseType(typeof(PaymentViewModelGet))]
         public async Task<IHttpActionResult> Get(int id)
         {
             //TODO: проверить права юзера
@@ -28,6 +32,7 @@ namespace API.Controllers
         [HttpGet]
         [Route("byuser/{userId}")]
         [RESTAuthorize(Role.PortalAdmin, Role.PortalManager)]
+        [ResponseType(typeof(PageView<PaymentViewModelShortGet>))]
         public async Task<IHttpActionResult> GetByUser(int userId)
         {
             //TODO: проверить права юзера
@@ -37,13 +42,15 @@ namespace API.Controllers
         [HttpPut]
         [RESTAuthorize(Role.PortalAdmin, Role.PortalManager)]
         [Route("{id}")]
+        [ResponseType(typeof(PaymentViewModelGet))]
         public async Task<IHttpActionResult> Put(int id, object putViewModel)
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        [RESTAuthorize(Role.PortalManager, Role.PortalManager)]
+        [RESTAuthorize(Role.PortalManager, Role.PortalAdmin)]
+        [ResponseType(typeof(PaymentViewModelGet))]
         public async Task<IHttpActionResult> Post(object postViewModel)
         {
             throw new NotImplementedException();
@@ -51,7 +58,7 @@ namespace API.Controllers
 
         [HttpDelete]
         [RESTAuthorize(Role.PortalManager, Role.PortalAdmin)]
-        [Route("id")]
+        [Route("{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             throw new NotImplementedException();
@@ -61,7 +68,8 @@ namespace API.Controllers
         /// https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
         /// </summary>
         [HttpPost]
-        public async Task<IHttpActionResult> YmNotify(object ymNotification)
+        [Route("ym-notify")]
+        public async Task<IHttpActionResult> YmNotify(YmNotificationViewModelPost ymNotification)
         {
             throw new NotImplementedException();
         }
@@ -71,6 +79,7 @@ namespace API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("ym-get-operation-details")]
         public async Task<IHttpActionResult> YmGetOperationDetails()
         {
             throw new NotImplementedException();

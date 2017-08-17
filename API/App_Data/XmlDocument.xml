@@ -665,6 +665,23 @@
             Обновление статуса заказа
             </summary>
         </member>
+        <member name="T:API.Controllers.PaymentController">
+            <summary>
+            https://money.yandex.ru/myservices/online.xml
+            https://money.yandex.ru/page?id=523014
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PaymentController.YmNotify(API.ViewModels.YmNotificationViewModelPost)">
+            <summary>
+            https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
+            </summary>
+        </member>
+        <member name="M:API.Controllers.PaymentController.YmGetOperationDetails">
+            <summary>
+            https://tech.yandex.ru/money/doc/dg/reference/operation-details-docpage/
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:API.Controllers.UserController">
             <summary>
             Управление пользователями
@@ -934,6 +951,81 @@
             Поле, по которому выдана сортировка
             </summary>
         </member>
+        <member name="P:API.ViewModels.PaymentViewModelGet.Time">
+            <summary>
+            Время оплаты
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelGet.Sum">
+            <summary>
+            Оплаченная сумма
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelGet.ExternalId">
+            <summary>
+             Id платежа внешней платёжной системы
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelGet.ExternalUserId">
+            <summary>
+            Id пользователя внешней платёжной системы
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelGet.Description">
+            <summary>
+            Описание, как оплатили (для нестандартных способов)
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelGet.IsDeleted">
+            <summary>
+            Оплата удалена
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelShortGet.Time">
+            <summary>
+            Время оплаты
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelShortGet.Sum">
+            <summary>
+            Оплаченная сумма
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelShortGet.IsDeleted">
+            <summary>
+            Оплата удалена
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelPost.Time">
+            <summary>
+            Время оплаты
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelPost.Sum">
+            <summary>
+            Оплаченная сумма
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelPost.ExternalId">
+            <summary>
+             Id платежа внешней платёжной системы
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelPost.ExternalUserId">
+            <summary>
+            Id пользователя внешней платёжной системы
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelPost.Description">
+            <summary>
+            Описание, как оплатили (для нестандартных способов)
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.PaymentViewModelPost.IsDeleted">
+            <summary>
+            Оплата удалена
+            </summary>
+        </member>
         <member name="T:API.ViewModels.UserViewModelGet">
             <summary>
             Пользователь
@@ -1004,6 +1096,16 @@
         <member name="P:API.ViewModels.UserRegisterViewModel.Email">
             <summary>
             Почта пользователя
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.YmNotificationViewModelPost">
+            <summary>
+            https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
+            </summary>
+        </member>
+        <member name="T:API.ViewModels.YmOperationDetailsViewModel">
+            <summary>
+            https://tech.yandex.ru/money/doc/dg/reference/operation-details-docpage/
             </summary>
         </member>
     </members>
