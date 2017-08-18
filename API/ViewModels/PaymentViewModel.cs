@@ -13,6 +13,8 @@ namespace API.ViewModels
 
         public int OrderId { get; set; }
 
+        public OrderShortViewModelGet Order { get; set; }
+
         /// <summary>
         /// Время оплаты
         /// </summary>
@@ -42,6 +44,8 @@ namespace API.ViewModels
         /// Оплата удалена
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        public PaymentType  PaymentType { get; set; }
     }
 
     public class PaymentViewModelShortGet
@@ -64,12 +68,14 @@ namespace API.ViewModels
         /// Оплата удалена
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        public PaymentType PaymentType { get; set; }
     }
 
     public class PaymentViewModelPost
     {
         [Required]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
 
         /// <summary>
         /// Время оплаты
@@ -102,5 +108,7 @@ namespace API.ViewModels
         /// Оплата удалена
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        public PaymentType PaymentType { get; set; }
     }
 }

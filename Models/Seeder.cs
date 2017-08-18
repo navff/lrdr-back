@@ -127,6 +127,7 @@ namespace Models
 
             if (!context.Payments.Any())
             {
+                var user = context.Users.First();
                 context.Payments.Add(new Payment
                 {
                     Description = "Оплатил через Сберкарту",
@@ -135,7 +136,8 @@ namespace Models
                     IsDeleted = false,
                     OrderId = context.Orders.First().Id,
                     Sum = 20,
-                    Time = DateTimeOffset.Now
+                    Time = DateTimeOffset.Now,
+                    UserId = user.Id
                 });
 
                 context.Payments.Add(new Payment
@@ -146,8 +148,34 @@ namespace Models
                     IsDeleted = false,
                     OrderId = context.Orders.First().Id,
                     Sum = 40,
-                    Time = DateTimeOffset.Now
+                    Time = DateTimeOffset.Now,
+                    UserId = user.Id
                 });
+
+                context.Payments.Add(new Payment
+                {
+                    Description = "Яндекс деньги. Детали первого платежа...",
+                    ExternalId = "ym-9hends933nnsss",
+                    ExternalUserId = "rerere@rerere",
+                    IsDeleted = false,
+                    Sum = 450,
+                    Time = DateTimeOffset.Now,
+                    PaymentType = PaymentType.ForSystemUsing,
+                    UserId = user.Id
+                });
+
+                context.Payments.Add(new Payment
+                {
+                    Description = "Яндекс деньги. Детали второго платежа...",
+                    ExternalId = "ym-8bwsbs8484bnmssj33",
+                    ExternalUserId = "rerere@rerere",
+                    IsDeleted = false,
+                    Sum = 500,
+                    Time = DateTimeOffset.Now,
+                    PaymentType = PaymentType.ForSystemUsing,
+                    UserId = user.Id
+                });
+
 
                 context.SaveChanges();
             }

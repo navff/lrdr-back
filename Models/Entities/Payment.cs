@@ -11,8 +11,7 @@ namespace Models.Entities
     {
         public int Id { get; set; }
 
-        [Required]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
         public Order Order { get; set; }
 
         /// <summary>
@@ -38,6 +37,11 @@ namespace Models.Entities
         public string ExternalUserId { get; set; }
 
         /// <summary>
+        /// Id пользователя внутри нашей системы
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
         /// Описание, как оплатили (для нестандартных способов)
         /// </summary>
         public string Description { get; set; }
@@ -46,6 +50,24 @@ namespace Models.Entities
         /// Оплата удалена
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// За что платёж
+        /// </summary>
+        public PaymentType PaymentType { get; set; }
+    }
+
+    public enum PaymentType
+    {
+        /// <summary>
+        /// За использование системы
+        /// </summary>
+        ForSystemUsing = 0,
+
+        /// <summary>
+        /// Оплата за конкретный заказ
+        /// </summary>
+        ForUserOrder = 1
     }
 
 }

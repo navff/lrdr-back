@@ -671,12 +671,17 @@
             https://money.yandex.ru/page?id=523014
             </summary>
         </member>
+        <member name="M:API.Controllers.PaymentController.Search(System.Nullable{System.Int32},Models.Operations.PaymentSearchType,System.Boolean,System.Int32)">
+            <summary>
+            Получает список платежей пользователя. Доступ самому этому пользователю и админам и менеджерам.
+            </summary>
+        </member>
         <member name="M:API.Controllers.PaymentController.YmNotify(API.ViewModels.YmNotificationViewModelPost)">
             <summary>
             https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
             </summary>
         </member>
-        <member name="M:API.Controllers.PaymentController.YmGetOperationDetails">
+        <member name="M:API.Controllers.PaymentController.YmGetOperationDetails(System.String)">
             <summary>
             https://tech.yandex.ru/money/doc/dg/reference/operation-details-docpage/
             </summary>
@@ -1103,9 +1108,260 @@
             https://tech.yandex.ru/money/doc/dg/reference/notification-p2p-incoming-docpage/
             </summary>
         </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.notification_type">
+            <summary>
+            Для переводов из кошелька - p2p-incoming
+            Для переводов с произвольной карты - card-incoming.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.operation_id">
+            <summary>
+            Идентификатор операции в истории счета получателя.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.amount">
+            <summary>
+            Сумма операции.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.withdraw_amount">
+            <summary>
+            Сумма, которая списана со счета отправителя.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.currency">
+            <summary>
+            Код валюты счета пользователя. Всегда 643 (рубль РФ согласно ISO 4217).
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.datetime">
+            <summary>
+            Дата и время совершения перевода.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.sender">
+            <summary>
+            Для переводов из кошелька - номер счета отправителя.
+            Для переводов с произвольной карты - параметр содержит пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.codepro">
+            <summary>
+            Для переводов из кошелька — перевод защищен кодом протекции.
+            Для переводов с произвольной карты — всегда false.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.label">
+            <summary>
+            Метка платежа. Если метки у платежа нет, параметр содержит пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.sha1_hash">
+            <summary>
+            SHA-1 hash параметров уведомления.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.test_notification">
+            <summary>
+            Флаг означает, что уведомление тестовое. По умолчанию параметр отсутствует.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.unaccepted">
+            <summary>
+            Флаг означает, что пользователь не получил перевод. Возможные причины:
+            Перевод заморожен, так как на счете получателя достигнут лимит доступного остатка.Отображается в поле hold ответа метода account-info.
+            Перевод защищен кодом протекции. В этом случае codepro = true.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.lastname">
+            <summary>
+            ФИО отправителя перевода. Если не запрашивались, параметры содержат пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.firstname">
+            <summary>
+            ФИО отправителя перевода. Если не запрашивались, параметры содержат пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.fathersname">
+            <summary>
+            ФИО отправителя перевода. Если не запрашивались, параметры содержат пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.email">
+            <summary>
+            Адрес электронной почты отправителя перевода. Если email не запрашивался, параметр содержит пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.phone">
+            <summary>
+            Телефон отправителя перевода. Если телефон не запрашивался, параметр содержит пустую строку.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmNotificationViewModelPost.city">
+            <summary>
+            Адрес, указанный отправителем перевода для доставки. Если адрес не запрашивался, параметры содержат пустую строку.
+            </summary>
+        </member>
         <member name="T:API.ViewModels.YmOperationDetailsViewModel">
             <summary>
             https://tech.yandex.ru/money/doc/dg/reference/operation-details-docpage/
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.error">
+            <summary>
+            Код ошибки, присутствует при ошибке выполнения запроса.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.operation_id">
+            <summary>
+            Идентификатор операции. Значение параметра соответствует либо значению 
+            параметра operation_id ответа метода operation-history либо, 
+            в случае если запрашивается история счета плательщика, 
+            значению поля payment_id ответа метода process-payment.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.status">
+            <summary>
+            Статус платежа (перевода). Значение параметра соответствует значению 
+            поля status ответа метода operation-history.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.pattern_id">
+            <summary>
+            Идентификатор шаблона платежа, по которому совершен платеж. 
+            Присутствует только для платежей.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.direction">
+            <summary>
+            Направление движения средств. Может принимать значения:
+            in (приход);
+            out (расход).
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.amount">
+            <summary>
+            Сумма операции (сумма списания со счета).
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.amount_due">
+            <summary>
+            Сумма к получению. Присутствует для исходящих переводов другим пользователям.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.fee">
+            <summary>
+            Сумма комиссии. Присутствует для исходящих переводов другим пользователям.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.datetime">
+            <summary>
+            Дата и время совершения операции.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.title">
+            <summary>
+            Краткое описание операции (название магазина или источник пополнения).
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.sender">
+            <summary>
+            Номер счета отправителя перевода. Присутствует для входящих 
+            переводов от других пользователей.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.recipient">
+            <summary>
+            Идентификатор получателя перевода. 
+            Присутствует для исходящих переводов другим пользователям.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.recipient_type">
+            <summary>
+            Тип идентификатора получателя перевода. 
+            Присутствует для исходяших переводов другим пользователям.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.message">
+            <summary>
+            Сообщение получателю перевода. 
+            Присутствует для переводов другим пользователям.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.comment">
+            <summary>
+            Комментарий к переводу или пополнению. 
+            Присутствует в истории отправителя перевода или получателя пополнения.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.codepro">
+            <summary>
+            Перевод защищен кодом протекции. 
+            Присутствует для переводов другим пользователям.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.protection_code">
+            <summary>
+            Код протекции. Присутствует для исходящих переводов, 
+            защищённых кодом протекции.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.expires">
+            <summary>
+            Дата и время истечения срока действия кода протекции. 
+            Присутствует для входящих и исходящих переводов (от/другим) 
+            пользователям, защищённых кодом протекции.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.answer_datetime">
+            <summary>
+            Дата и время приёма или отмены перевода, защищённого кодом протекции. 
+            Присутствует для входящих и исходящих переводов, защищённых кодом протекции. 
+            Если перевод еще не принят/не отвергнут получателем - поле отсутствует.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.label">
+            <summary>
+            Метка платежа. Присутствует для входящих и исходящих переводов 
+            другим пользователям Яндекс.Денег, у которых был указан 
+            параметр label вызова request-payment.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.details">
+            <summary>
+            Детальное описание платежа. Строка произвольного формата, 
+            может содержать любые символы и переводы строк.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.type">
+            <summary>
+            Тип операции. Описание возможных типов операций см. в описании
+            метода operation-history
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.digital_goods">
+            <summary>
+            Данные о цифровом товаре (пин-коды и бонусы игр, iTunes, Xbox, etc.) 
+            Поле присутствует при успешном платеже в магазины цифровых товаров. 
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.account">
+            <summary>
+            Номер счета получателя в сервисе Яндекс.Деньги.
+            Для исходящих переводов
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.phone">
+            <summary>
+            Номер привязанного мобильного телефона получателя.
+            Для исходящих переводов
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.YmOperationDetailsViewModel.email">
+            <summary>
+            Email получателя.
+            Для исходящих переводов
             </summary>
         </member>
     </members>

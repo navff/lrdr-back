@@ -32,10 +32,10 @@ namespace Tests.Controllers
         }
 
         [TestMethod]
-        public void GetByUser_Ok_Test()
+        public void Search_ByCustomerUser_Ok_Test()
         {
             var payment = _context.Payments.Include(p => p.Order).First();
-            var url = $"api/payment/byuser/{payment.Order.CustomerUserId}";
+            var url = $"api/payment/search?id={payment.Order.CustomerUserId}&searchType=CustomerUser";
             var result = HttpGet<PageView<PaymentViewModelShortGet>>(url, _user.AuthToken);
             Assert.IsTrue(result.Content.Any());
         }
@@ -102,13 +102,13 @@ namespace Tests.Controllers
             }
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void YmNotify_Ok_Test()
         {
             throw new NotImplementedException();
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void YmGetOperationDetails_Ok_Test()
         {
             throw new NotImplementedException();

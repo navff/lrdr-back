@@ -28,6 +28,12 @@ namespace API
                 cfg.CreateMap<Order, OrderViewModelGet>();
                 cfg.CreateMap<PageViewDTO<Comment>, PageView<CommentViewModelGet>>();
                 cfg.CreateMap<Comment, CommentViewModelGet>();
+                cfg.CreateMap<Payment, PaymentViewModelGet>();
+                cfg.CreateMap<Payment, PaymentViewModelShortGet>();
+                cfg.CreateMap<Payment, PaymentViewModelShortGet>();
+                cfg.CreateMap<PageViewDTO<Payment>, PageView<PaymentViewModelShortGet>>();
+                cfg.CreateMap<PageViewDTO<Payment>, PageView<PaymentViewModelGet>>();
+
 
 
                 // ViewModels to Models
@@ -35,6 +41,7 @@ namespace API
                 cfg.CreateMap<OrderViewModelPost, Order>();
                 cfg.CreateMap<CommentViewModelGet, Comment>();
                 cfg.CreateMap<PageView<CommentViewModelGet>, PageViewDTO<Comment>>();
+                cfg.CreateMap<PaymentViewModelPost, Payment>();
             });
         }
     }
