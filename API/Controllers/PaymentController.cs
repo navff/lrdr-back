@@ -19,6 +19,8 @@ namespace API.Controllers
     [RoutePrefix("api/payment")]
     public class PaymentController : ApiController
     {
+        
+
         [HttpGet]
         [RESTAuthorize]
         [Route("{id}")]
@@ -79,8 +81,9 @@ namespace API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("ym-get-operation-details")]
-        public async Task<IHttpActionResult> YmGetOperationDetails()
+        [Route("ym-get-operation-details/{operation_id}")]
+        [ResponseType(typeof(YmOperationDetailsViewModel))]
+        public async Task<IHttpActionResult> YmGetOperationDetails(string operation_id)
         {
             throw new NotImplementedException();
         }
