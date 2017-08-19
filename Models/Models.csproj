@@ -79,6 +79,8 @@
     <Compile Include="Entities\File.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Payment.cs" />
+    <Compile Include="HelpClasses\FileDto.cs" />
+    <Compile Include="HelpClasses\FileHelpers.cs" />
     <Compile Include="HelpClasses\YmNotification.cs" />
     <Compile Include="LrdrContext.cs" />
     <Compile Include="Migrations\201708110446048_init.cs" />
@@ -87,6 +89,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Operations\CommentOperations.cs" />
+    <Compile Include="Operations\FileOperations.cs" />
     <Compile Include="Operations\OrderOperations.cs" />
     <Compile Include="Operations\PageViewDTO.cs" />
     <Compile Include="Operations\PaymentOperations.cs" />

@@ -15,6 +15,8 @@ namespace Models.Entities
 
         public int? LinkedObjectId { get; set; }
         public LinkedObjectType LinkedObjectType { get; set; }
+
+        public DateTimeOffset Created { get; set; }
         
     }
 
