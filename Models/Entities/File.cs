@@ -17,13 +17,21 @@ namespace Models.Entities
         public LinkedObjectType LinkedObjectType { get; set; }
 
         public DateTimeOffset Created { get; set; }
+
+        /// <summary>
+        /// Временный файл передаётся с FormId. Затем он 
+        /// будет удалён, как только будет сохранена остальная
+        /// форма.
+        /// </summary>
+        public string FormId { get; set; }
         
     }
 
     public enum LinkedObjectType
     {
         User = 0,
-        Comment = 1
+        Comment = 1,
+        TempForm = 10,
     }
 
 

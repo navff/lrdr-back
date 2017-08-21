@@ -33,7 +33,7 @@ namespace Models.Operations
             }
 
             string baseFilePath = AppDomain.CurrentDomain.BaseDirectory;
-            string filepath = baseFilePath + GetRelativeFilePath(fileId, fileFromDb.Extension);
+            string filepath = baseFilePath + "\\" + GetRelativeFilePath(fileId, fileFromDb.Extension);
 
             // удалить файл картинки
             try
@@ -55,6 +55,7 @@ namespace Models.Operations
             var fileFromDb = await _context.Files.FirstOrDefaultAsync(f => f.Id == fileId);
             var fileDto = Mapper.Map<FileDto>(fileFromDb);
             fileDto.Path = GetRelativeFilePath(fileFromDb.Id, fileFromDb.Extension);
+            fileDto.PathThumb = GetRelativeFilePath(fileFromDb.Id, "thumb.jpg");
             return fileDto;
         }
 
@@ -70,14 +71,17 @@ namespace Models.Operations
                 Extension = file.Extension,
                 LinkedObjectId = file.LinkedObjectId,
                 LinkedObjectType = file.LinkedObjectType,
-                Created = DateTimeOffset.Now
+                Created = DateTimeOffset.Now,
+                Name = file.Name,
+                FormId = file.FormId
             });
             await _context.SaveChangesAsync();
 
             string fileName = AddLeftZeroesToId(fileInDb.Id) + "." + fileInDb.Extension;
+            string thumbFileName = AddLeftZeroesToId(fileInDb.Id) + ".thumb.jpg";
 
             // куда складывать файлы
-            string baseFilePath = AppDomain.CurrentDomain.BaseDirectory + "userfiles";
+            string baseFilePath = AppDomain.CurrentDomain.BaseDirectory + "/userfiles";
 
             // Создаём папку первого уровня
             string firstLevelFolderName = fileName.Substring(0, 3);
@@ -87,13 +91,16 @@ namespace Models.Operations
             string secondLevelFolderName = fileName.Substring(3, 3);
             string secondLevelPath = CheckAndCreateDirectory(baseFilePath + "/" + firstLevelFolderName + "/" + secondLevelFolderName);
             string fullPath = secondLevelPath + "/" + fileName;
+            string fullPathToThumb = secondLevelPath + "/" + thumbFileName;
             // Создать нужную папку в файловой системе
             // И сохнарить картинку туда
-            FileHelpers.Base64ToFile(base64Data, fullPath, file.Extension, ModelsSettings.IMAGE_WIDTH);
-
-            var result = Mapper.Map<FileDto>(fileInDb);
-            result.Path = GetRelativeFilePath(result.Id, result.Extension);
-            return result;
+            if (FileHelpers.IsImage(file.Extension))
+            {
+                FileHelpers.Base64ToFile(base64Data, fullPathToThumb, "thumb."+file.Extension, ModelsSettings.IMAGE_WIDTH);
+            }
+            FileHelpers.Base64ToFile(base64Data, fullPath, file.Extension, 10000);
+            
+            return await GetFile(fileInDb.Id);
         }
 
       

@@ -122,6 +122,7 @@
     <Compile Include="Helpers\TestHelpers.cs" />
     <Compile Include="InMemoryHttpContentSerializationHandler.cs" />
     <Compile Include="Operations\CommentOperationsTest.cs" />
+    <Compile Include="Operations\FileOperationsTest.cs" />
     <Compile Include="Operations\OrderOperationsTest.cs" />
     <Compile Include="Operations\PaymentOperationsTest.cs" />
     <Compile Include="Operations\UsersOperationsTest.cs" />

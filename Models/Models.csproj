@@ -87,6 +87,10 @@
     <Compile Include="Migrations\201708110446048_init.Designer.cs">
       <DependentUpon>201708110446048_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708210607552_form_id_to_files.cs" />
+    <Compile Include="Migrations\201708210607552_form_id_to_files.Designer.cs">
+      <DependentUpon>201708210607552_form_id_to_files.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Operations\CommentOperations.cs" />
     <Compile Include="Operations\FileOperations.cs" />
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708110446048_init.resx">
       <DependentUpon>201708110446048_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708210607552_form_id_to_files.resx">
+      <DependentUpon>201708210607552_form_id_to_files.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

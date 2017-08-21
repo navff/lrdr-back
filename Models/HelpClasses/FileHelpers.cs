@@ -20,7 +20,7 @@ namespace Models.HelpClasses
         public static void Base64ToFile(string base64String, string filePathAndName, string fileExtension, int width)
         {
             var bytes = Convert.FromBase64String(base64String);
-            if (IsImage(fileExtension))
+            if (IsImage(fileExtension)  && IsThumbnail(fileExtension))
             {
                 bytes = Resize(width, bytes);
             }
@@ -71,7 +71,23 @@ namespace Models.HelpClasses
             ms.Write(imageInBytes, 0, imageInBytes.Length);
             var image = Image.FromStream(ms, true);
             image = ScaleImage(image, width, width);
-            return ImageToByteArray(image);
+
+            using (var b = new Bitmap(image.Width, image.Height))
+            {
+                b.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+                using (var g = Graphics.FromImage(b))
+                {
+                    g.Clear(Color.White);
+                    g.DrawImageUnscaled(image, 0, 0);
+                }
+
+                return ImageToByteArray(b);
+            }
+
+            
+ 
+            
         }
 
         public static Image ScaleImage(Image image, int maxWidth, int maxHeight)
@@ -106,14 +122,20 @@ namespace Models.HelpClasses
             }
         }
 
-        private static bool IsImage(string extension)
+        public static bool IsImage(string extension)
         {
             extension = extension.ToLower();
-            return (extension == "jpg") 
-                || (extension == "jpeg") 
-                || (extension=="png") 
-                || (extension == "gif")
-                || (extension == "bmp");
+            return (extension.Contains("jpg") ) 
+                || (extension.Contains("jpeg")) 
+                || (extension.Contains("png")) 
+                || (extension.Contains("gif"))
+                || (extension.Contains("bmp"));
+
+        }
+
+        public static bool IsThumbnail(string extension)
+        {
+            return (extension.ToLower().Contains("thumb"));
 
         }
     }
