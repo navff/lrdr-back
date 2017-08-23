@@ -207,5 +207,15 @@ namespace API.Operations
             return hash.Aggregate(string.Empty, (current, x) => current + $"{x:x2}");
         }
 
+        /// <summary>
+        /// Проверяет, есть ли у пользователя права на редактирование пользователя
+        /// </summary>
+        /// <param name="userId">Пользователь, которого хотим редактировать</param>
+        /// <param name="email">Действующий пользователь</param>
+        /// <returns></returns>
+        public async Task<bool> CheckRights(int userId, string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

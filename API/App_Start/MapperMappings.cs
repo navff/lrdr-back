@@ -35,6 +35,7 @@ namespace API
                 cfg.CreateMap<PageViewDTO<Payment>, PageView<PaymentViewModelShortGet>>();
                 cfg.CreateMap<PageViewDTO<Payment>, PageView<PaymentViewModelGet>>();
                 cfg.CreateMap<File, FileDto>();
+                cfg.CreateMap<FileDto, FileViewModelGet>();
 
 
                 // ViewModels to Models

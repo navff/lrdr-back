@@ -24,6 +24,12 @@ namespace Models.Entities
         /// форма.
         /// </summary>
         public string FormId { get; set; }
+
+        /// <summary>
+        /// Код Guid, для непрямого доступа к файловой системе,
+        /// чтобы невозможно было предсказать имя соседнего файла
+        /// </summary>
+        public string Code { get; set; }
         
     }
 

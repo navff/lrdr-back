@@ -59,6 +59,16 @@ namespace Models.Operations
             return fileDto;
         }
 
+        public async Task<FileDto> GetFile(string code)
+        {
+            var fileFromDb = await _context.Files.FirstOrDefaultAsync(f => f.Code == code);
+            if (fileFromDb == null) throw new NotFoundException();
+            var fileDto = Mapper.Map<FileDto>(fileFromDb);
+            fileDto.Path = GetRelativeFilePath(fileFromDb.Id, fileFromDb.Extension);
+            fileDto.PathThumb = GetRelativeFilePath(fileFromDb.Id, "thumb.jpg");
+            return fileDto;
+        }
+
         public async Task<FileDto> Addfile(Entities.File file, string base64Data)
         {
             Contracts.Assert(!String.IsNullOrEmpty(file.Extension),
@@ -73,7 +83,8 @@ namespace Models.Operations
                 LinkedObjectType = file.LinkedObjectType,
                 Created = DateTimeOffset.Now,
                 Name = file.Name,
-                FormId = file.FormId
+                FormId = file.FormId,
+                Code = Guid.NewGuid().ToString()
             });
             await _context.SaveChangesAsync();
 
@@ -163,6 +174,20 @@ namespace Models.Operations
             string secondLevelPath = baseFilePath + "/" + firstLevelFolderName + "/" + secondLevelFolderName;
 
             return secondLevelPath + "/" + fileName;
+        }
+
+        public async Task<byte[]> GetFileData(string code, bool thumb)
+        {
+            var fileDto = await GetFile(code);
+            var path = thumb ? fileDto.PathThumb : fileDto.Path;
+            return File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/" + path);
+
+             
+        }
+
+        public async Task<bool> CheckRights(int fileId, string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

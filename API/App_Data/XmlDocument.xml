@@ -774,6 +774,96 @@
             Текст комментария
             </summary>
         </member>
+        <member name="P:API.ViewModels.FileViewModelGet.Id">
+            <summary>
+            Внутренний Id файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.Name">
+            <summary>
+            Имя файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.Extension">
+            <summary>
+            Расширение
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.LinkedObjectId">
+            <summary>
+            Id связанного объекта
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.LinkedObjectType">
+            <summary>
+            Тип связанного объекта
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.Created">
+            <summary>
+            Дата создания файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.FormId">
+            <summary>
+            Временный файл передаётся с FormId. Затем он 
+            будет удалён, как только будет сохранена остальная
+            форма.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelGet.Code">
+            <summary>
+            Код Guid, для непрямого доступа к файловой системе,
+            чтобы невозможно было предсказать имя соседнего файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelPost.Name">
+            <summary>
+            Имя файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelPost.Extension">
+            <summary>
+            Расширение
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelPost.FormId">
+            <summary>
+            Временный файл передаётся с FormId. Затем он 
+            будет удалён, как только будет сохранена остальная
+            форма.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileViewModelPost.Data">
+            <summary>
+            Содержимое файла в Base64
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileToExistsObjectViewModelPost.Name">
+            <summary>
+            Имя файла
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileToExistsObjectViewModelPost.Extension">
+            <summary>
+            Расширение
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileToExistsObjectViewModelPost.LinkedObjectId">
+            <summary>
+            Ссылка на объект, к которому прикрепляем файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileToExistsObjectViewModelPost.LinkedObjectType">
+            <summary>
+            Тип объекта, к которому прикрепляем файл
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.FileToExistsObjectViewModelPost.Data">
+            <summary>
+            Содержимое файла в Base64
+            </summary>
+        </member>
         <member name="P:API.ViewModels.OrderViewModelGet.Code">
             <summary>
             GUID-код, который будет в адресной строке
