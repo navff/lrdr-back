@@ -44,6 +44,8 @@ namespace API
                 cfg.CreateMap<CommentViewModelGet, Comment>();
                 cfg.CreateMap<PageView<CommentViewModelGet>, PageViewDTO<Comment>>();
                 cfg.CreateMap<PaymentViewModelPost, Payment>();
+                cfg.CreateMap<FileViewModelPost, File>();
+                cfg.CreateMap<FileToExistsObjectViewModelPost, File>();
             });
         }
     }

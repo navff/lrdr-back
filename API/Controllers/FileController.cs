@@ -38,7 +38,7 @@ namespace API.Controllers
         public async Task<IHttpActionResult> Get(string code)
         {
             var file = await _fileOperations.GetFile(code);
-            if (file == null) return this.Result404("This file is not found");
+            if (file == null) return this.Result404("This file is not found in Db");
 
             var result = Mapper.Map<FileViewModelGet>(file);
             return Ok(result);
@@ -50,18 +50,26 @@ namespace API.Controllers
         public async Task<IHttpActionResult> GetData(string code, bool thumb=false)
         {
             var file = await _fileOperations.GetFile(code);
-            if (file == null) return this.Result404("This file is not found");
+            if (file == null) return this.Result404("This file is not found in Db");
 
-            var data = await _fileOperations.GetFileData(code, thumb);
-            var result = Request.CreateResponse(HttpStatusCode.OK);
-            Stream stream = new MemoryStream(data);
-            result.Content = new StreamContent(stream);
-            if (FileHelpers.IsImage(file.Extension))
+            try
             {
-                result.Content.Headers.ContentType = new MediaTypeHeaderValue($"image/{file.Extension}");
-            }
+                var data = await _fileOperations.GetFileData(code, thumb);
+                var result = Request.CreateResponse(HttpStatusCode.OK);
+                Stream stream = new MemoryStream(data);
+                result.Content = new StreamContent(stream);
+                if (FileHelpers.IsImage(file.Extension))
+                {
+                    result.Content.Headers.ContentType = new MediaTypeHeaderValue($"image/{file.Extension}");
+                }
 
-            return new ResponseMessageResult(result);
+                return new ResponseMessageResult(result);
+            }
+            catch (FileNotFoundException e)
+            {
+                return this.Result404("This file is not found in file system");
+            }
+            
         }
 
         [RESTAuthorize]
@@ -91,7 +99,7 @@ namespace API.Controllers
                 canEdit = await _userOperations.CheckRights(postViewModel.LinkedObjectId, User.Identity.Name);
             }
             
-            if (!canEdit) return this.Result403("You haven't rights to delete this file");
+            if (!canEdit) return this.Result403("You haven't rights to add files to this object");
 
             var file = Mapper.Map<File>(postViewModel);
             var result = await _fileOperations.Addfile(file, postViewModel.Data);

@@ -5,11 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Operations;
 using AutoMapper;
 using Camps.Tools;
+using Models.Entities;
 using Models.HelpClasses;
 using Models.Tools;
 using NLog;
+using File = System.IO.File;
 
 namespace Models.Operations
 {
@@ -17,11 +20,15 @@ namespace Models.Operations
     {
         private Logger _logger;
         private LrdrContext _context;
+        private CommentOperations _commentOperations;
+        private UserOperations _userOperations;
 
         public FileOperations(LrdrContext context)
         {
             _logger = LogManager.GetLogger("FileOperations");
             _context = context;
+            _userOperations = new UserOperations(_context);
+            _commentOperations = new CommentOperations(_context);
         }
 
         public async Task DeleteFile(int fileId)
@@ -62,7 +69,7 @@ namespace Models.Operations
         public async Task<FileDto> GetFile(string code)
         {
             var fileFromDb = await _context.Files.FirstOrDefaultAsync(f => f.Code == code);
-            if (fileFromDb == null) throw new NotFoundException();
+            if (fileFromDb == null) return null;
             var fileDto = Mapper.Map<FileDto>(fileFromDb);
             fileDto.Path = GetRelativeFilePath(fileFromDb.Id, fileFromDb.Extension);
             fileDto.PathThumb = GetRelativeFilePath(fileFromDb.Id, "thumb.jpg");
@@ -187,7 +194,24 @@ namespace Models.Operations
 
         public async Task<bool> CheckRights(int fileId, string email)
         {
-            throw new NotImplementedException();
+            var fileDto = await GetFile(fileId);
+
+            // Если файл никуда не привязан (что очень странно),
+            // то пусть его удаляют все, кому не лень
+            if (!fileDto.LinkedObjectId.HasValue) return true;
+
+            if (fileDto.LinkedObjectType == LinkedObjectType.Comment)
+            {
+                return await _commentOperations.CheckRights(fileDto.LinkedObjectId.Value, email);
+            }
+
+            if (fileDto.LinkedObjectType == LinkedObjectType.User)
+            {
+                var user = await _userOperations.GetAsync(email);
+                return user.Id == fileDto.LinkedObjectId;
+            }
+
+            return false;
         }
     }
 }
