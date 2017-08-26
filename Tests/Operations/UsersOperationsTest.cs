@@ -73,14 +73,14 @@ namespace Tests.Operations
         {
 
             var randomString = Guid.NewGuid().ToString();
-            var file = _context.Files.First(f => f.LinkedObjectType == LinkedObjectType.User);
+            var file = _context.Files.FirstOrDefault(f => f.LinkedObjectType == LinkedObjectType.User);
             var user = new User
             {
                 Name = randomString,
                 Phone = randomString,
                 Email = randomString + "@33kita.ru",
                 AuthToken = randomString,
-                AvatarFileId = file.Id,
+                AvatarFileId = file?.Id,
                 Role = Role.RegisteredUser,
                 DateRegistered = DateTime.Now
             };
