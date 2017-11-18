@@ -76,6 +76,24 @@ namespace Models.Operations
             return fileDto;
         }
 
+        public async Task<IEnumerable<FileDto>> GetFilesByLinkedObject(int linkedObjectId, LinkedObjectType linkedObjectType)
+        {
+            var filesFromDb = await _context.Files.Where(f => (f.LinkedObjectId == linkedObjectId) 
+                                                                        && (f.LinkedObjectType == linkedObjectType) )
+                                                                        .ToListAsync();
+            if (filesFromDb == null) return null;
+
+            var result = new List<FileDto>();
+            foreach (var file in filesFromDb)
+            {
+                var fileDto = Mapper.Map<FileDto>(file);
+                fileDto.Path = GetRelativeFilePath(fileDto.Id, fileDto.Extension);
+                fileDto.PathThumb = GetRelativeFilePath(fileDto.Id, "thumb.jpg");
+                result.Add(fileDto);
+            }
+            return result;
+        }
+
         public async Task<FileDto> Addfile(Entities.File file, string base64Data)
         {
             Contracts.Assert(!String.IsNullOrEmpty(file.Extension),

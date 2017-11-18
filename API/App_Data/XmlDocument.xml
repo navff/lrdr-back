@@ -1141,6 +1141,16 @@
             Номер телефона
             </summary>
         </member>
+        <member name="P:API.ViewModels.UserViewModelGet.AvatarUrl">
+            <summary>
+            Аватарка
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelGet.AvatarUrlThumb">
+            <summary>
+            Превью аватарки
+            </summary>
+        </member>
         <member name="P:API.ViewModels.UserViewModelGet.RoleName">
             <summary>
             Название роли

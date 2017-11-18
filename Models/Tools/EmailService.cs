@@ -53,6 +53,6 @@ namespace Models.Tools
     public class UserMessages
     {
         public static readonly string SubjectConfirmEmail = "Пожалуйста подтвердите Ваш E-mail";
-        public static readonly string SubjectConfirmLogin = "Подтвердите вход на сайт «Моё хобби»";
+        public static readonly string SubjectConfirmLogin = "Подтвердите вход на сайт «Light Order»";
     }
 }

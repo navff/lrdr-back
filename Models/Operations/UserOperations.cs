@@ -215,7 +215,13 @@ namespace API.Operations
         /// <returns></returns>
         public async Task<bool> CheckRights(int userId, string email)
         {
-            throw new NotImplementedException();
+            var currentUser = await GetAsync(email);
+            if (currentUser.Role == Role.PortalAdmin || currentUser.Role == Role.PortalManager)
+                return true;
+
+            if (currentUser.Id == userId) return true;
+
+            return false;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Models
                 context.Users.AddOrUpdate(new User()
                 {
                     AuthToken = "HREN",
-                    Email = "hren@33kita.ru",
+                    Email = "hren@mhbb.ru",
                     Role = Role.PortalAdmin,
                     DateRegistered = DateTime.Now,
                     Name = "Вова Хрен",
@@ -45,7 +45,7 @@ namespace Models
                 context.Users.AddOrUpdate(new User()
                 {
                     AuthToken = "test",
-                    Email = "test@33kita.ru",
+                    Email = "test@mhbb.ru",
                     Role = Role.PortalAdmin,
                     DateRegistered = DateTime.Now,
                     Phone = "+79062990077",
@@ -55,7 +55,7 @@ namespace Models
                 context.Users.AddOrUpdate(new User()
                 {
                     AuthToken = "registered_user_token1",
-                    Email = "registered_user1@33kita.ru",
+                    Email = "registered_user1@mhbb.ru",
                     Role = Role.RegisteredUser,
                     DateRegistered = DateTime.Now,
                     Name = "Зарегистрированный пользователь1"
@@ -64,7 +64,7 @@ namespace Models
                 context.Users.AddOrUpdate(new User()
                 {
                     AuthToken = "registered_user_token2",
-                    Email = "registered_user2@33kita.ru",
+                    Email = "registered_user2@mhbb.ru",
                     Role = Role.RegisteredUser,
                     DateRegistered = DateTime.Now,
                     Name = "Зарегистрированный пользователь2"
@@ -73,7 +73,7 @@ namespace Models
                 context.Users.AddOrUpdate(new User()
                 {
                     AuthToken = "registered_user_token3",
-                    Email = "registered_user3@33kita.ru",
+                    Email = "registered_user3@mhbb.ru",
                     Role = Role.RegisteredUser,
                     DateRegistered = DateTime.Now,
                     Name = "Зарегистрированный пользователь3"

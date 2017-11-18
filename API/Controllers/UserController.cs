@@ -16,6 +16,7 @@ using AutoMapper;
 using Camps.Tools;
 using Models;
 using Models.Entities;
+using Models.Operations;
 
 namespace API.Controllers
 {
@@ -26,10 +27,12 @@ namespace API.Controllers
     public class UserController : ApiController
     {
         private readonly UserOperations _userOperations;
+        private readonly FileOperations _fileOperations;
 
-        public UserController(UserOperations userOperations)
+        public UserController(UserOperations userOperations, FileOperations fileOperations)
         {
             _userOperations = userOperations;
+            _fileOperations = fileOperations;
         }
 
         /// <summary>
@@ -50,12 +53,12 @@ namespace API.Controllers
                 }
                 var result = Mapper.Map<UserViewModelGet>(entity);
                 result.RoleName = entity.Role.ToString();
-                /*var pic = (await _pictureOperations.GetByLinkedObject(LinkedObjectType.User, entity.Id)).FirstOrDefault();
-                result.Picture = Mapper.Map<PictureViewModelGet>(pic);
-                if (result.Picture != null)
+                var pic = (await _fileOperations.GetFilesByLinkedObject(entity.Id, LinkedObjectType.User)).FirstOrDefault();
+                if (pic != null)
                 {
-                    result.Picture.Url = Url.Content($"~/api/picture/{result.Picture.Id}");
-                }*/
+                    result.AvatarUrl = Url.Content($"~/api/file/data/{pic.Code}");
+                    result.AvatarUrlThumb = Url.Content($"~/api/file/data/{pic.Code}?thumb=true");
+                }
                 return Ok(result);
             }
             catch (Exception e)
