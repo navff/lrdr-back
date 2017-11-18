@@ -49,7 +49,9 @@ namespace Models.Operations
             }
         }
 
-        public async Task<PageViewDTO<Order>> SearchAsync(string word="", int? userId=null, 
+        public async Task<PageViewDTO<Order>> SearchAsync(string word="", int? customerUserId=null,
+                                                          int? ownerUserId = null,
+                                                          bool? isPaid = null,
                                                           OrderSorting sortby=OrderSorting.Updated, 
                                                           int page=1)
         {
@@ -70,10 +72,25 @@ namespace Models.Operations
                                              );
                 }
 
-                if (userId.HasValue)
+                if (customerUserId.HasValue)
                 {
-                    query = query.Where(o => (o.CustomerUserId == userId.Value)
-                                          || (o.OwnerUserId == userId.Value));
+                    query = query.Where(o => o.CustomerUserId == customerUserId.Value);
+                }
+
+                if (ownerUserId.HasValue)
+                {
+                    query = query.Where(o => o.OwnerUserId == ownerUserId.Value);
+                }
+
+                if (isPaid == true)
+                {
+                    query = query.Where(o => (o.Status == OrderStatus.Payed)
+                                             || (o.Status == OrderStatus.Done));
+                }
+                if (isPaid == false)
+                {
+                    query = query.Where(o => (o.Status != OrderStatus.Payed)
+                                             && (o.Status != OrderStatus.Done));
                 }
 
                 switch (sortby)

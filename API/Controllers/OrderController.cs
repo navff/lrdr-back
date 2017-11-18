@@ -54,8 +54,12 @@ namespace API.Controllers
         public async Task<IHttpActionResult> Search([FromUri] SearchOrderViewModelGet searchViewModel)
         {
             if (searchViewModel == null) searchViewModel = new SearchOrderViewModelGet();
-            var dto = await _orderOperations.SearchAsync(searchViewModel.Word, searchViewModel.userId,
-                searchViewModel.SortBy, searchViewModel.Page);
+            var dto = await _orderOperations.SearchAsync(word: searchViewModel.Word, 
+                                                         customerUserId: searchViewModel.CustomerUserId,
+                                                         ownerUserId:searchViewModel.OwnerUserId,
+                                                         isPaid:searchViewModel.isPaid,
+                                                         sortby: searchViewModel.SortBy, 
+                                                         page: searchViewModel.Page);
             var result = Mapper.Map<PageView<OrderShortViewModelGet>>(dto);
             return Ok(result);
         }
