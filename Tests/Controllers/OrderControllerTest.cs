@@ -8,6 +8,7 @@ using API.Models;
 using API.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models.Entities;
+using System.Data.Entity;
 
 namespace Tests.Controllers
 {
@@ -53,16 +54,15 @@ namespace Tests.Controllers
         public void Put_Ok_Test()
         {
             var rndString = Guid.NewGuid().ToString();
-            var order = _context.Orders.First();
+            var order = _context.Orders.Include(o => o.CustomerUser).First();
             var user = _context.Users.First(u => u.Role == Role.PortalAdmin);
             var url = $"api/order/{order.Id}";
             var viewModel = new OrderViewModelPost
             {
                 Name = rndString,
                 Created = order.Created,
-                CustomerUserId = order.CustomerUserId,
+                ClientEmail = order.CustomerUser.Email,
                 Deadline = order.Deadline,
-                IsDeleted = order.IsDeleted,
                 OwnerUserId = order.OwnerUserId
             };
             var result = HttpPut<OrderViewModelGet>(url, viewModel, user.AuthToken);
@@ -79,9 +79,8 @@ namespace Tests.Controllers
             {
                 Name = rndString,
                 Created = DateTimeOffset.Now,
-                CustomerUserId = user.Id,
+                ClientEmail = user.Email,
                 Deadline = DateTimeOffset.Now.AddDays(60),
-                IsDeleted = false,
                 OwnerUserId = user.Id
             };
             var result = HttpPost<OrderViewModelGet>(url, viewModel, user.AuthToken);

@@ -164,17 +164,14 @@ namespace API.ViewModels
         /// <summary>
         /// Id клиента, для которого делается заказ
         /// </summary>
-        public int? CustomerUserId { get; set; }
+        [Required]
+        public string ClientEmail { get; set; }
 
         /// <summary>
         /// Время создания заказа
         /// </summary>
         public DateTimeOffset Created { get; set; }
 
-        /// <summary>
-        /// Удалён в корзину
-        /// </summary>
-        public bool IsDeleted { get; set; }
     }
 
     public class OrderChangeStatusViewModelPost

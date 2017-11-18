@@ -1000,7 +1000,7 @@
             Дэдлайн заказа
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelPost.CustomerUserId">
+        <member name="P:API.ViewModels.OrderViewModelPost.ClientEmail">
             <summary>
             Id клиента, для которого делается заказ
             </summary>
@@ -1008,11 +1008,6 @@
         <member name="P:API.ViewModels.OrderViewModelPost.Created">
             <summary>
             Время создания заказа
-            </summary>
-        </member>
-        <member name="P:API.ViewModels.OrderViewModelPost.IsDeleted">
-            <summary>
-            Удалён в корзину
             </summary>
         </member>
         <member name="T:API.ViewModels.PageView`1">
@@ -1460,7 +1455,7 @@
         </member>
         <member name="P:API.ViewModels.YmOperationDetailsViewModel.email">
             <summary>
-            Email получателя.
+            ClientEmail получателя.
             Для исходящих переводов
             </summary>
         </member>

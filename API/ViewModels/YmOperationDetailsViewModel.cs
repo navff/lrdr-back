@@ -161,7 +161,7 @@ namespace API.ViewModels
         public string phone { get; set; }
 
         /// <summary>
-        /// Email получателя.
+        /// ClientEmail получателя.
         /// Для исходящих переводов
         /// </summary>
         public string email { get; set; }
