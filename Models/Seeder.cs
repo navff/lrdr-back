@@ -218,7 +218,8 @@ namespace Models
                     LinkedObjectType = LinkedObjectType.User,
                     Extension = "jpg",
                     LinkedObjectId = context.Users.First().Id,
-                    Name = "avatarka"
+                    Name = "avatarka",
+                    Code = Guid.NewGuid().ToString()
                 });
 
                 context.Files.Add(new File
@@ -226,7 +227,8 @@ namespace Models
                     LinkedObjectType = LinkedObjectType.Comment,
                     Extension = "jpg",
                     LinkedObjectId = context.Comments.First().Id,
-                    Name = "фоточка к комментарию"
+                    Name = "фоточка к комментарию",
+                    Code = Guid.NewGuid().ToString()
                 });
 
                 context.Files.Add(new File
@@ -234,7 +236,8 @@ namespace Models
                     LinkedObjectType = LinkedObjectType.Comment,
                     Extension = "docx",
                     LinkedObjectId = context.Comments.First().Id,
-                    Name = "документик к комментарию"
+                    Name = "документик к комментарию",
+                    Code = Guid.NewGuid().ToString()
                 });
 
                 context.SaveChanges();
