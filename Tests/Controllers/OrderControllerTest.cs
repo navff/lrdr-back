@@ -35,7 +35,7 @@ namespace Tests.Controllers
         {
             var order = _context.Orders.First();
             var user = _context.Users.First(u => u.Role == Role.PortalAdmin);
-            var url = $"api/order/search?word={order.OwnerUser.Email}";
+            var url = $"api/order/search?word={order.ContractorUser.Email}";
             var result = HttpGet<PageView<OrderShortViewModelGet>>(url, user.AuthToken);
             Assert.IsTrue(result.Content.Any());
         }
@@ -61,29 +61,51 @@ namespace Tests.Controllers
             {
                 Name = rndString,
                 Created = order.Created,
-                ClientEmail = order.CustomerUser.Email,
+                CustomerEmail = order.CustomerUser.Email,
                 Deadline = order.Deadline,
-                OwnerUserId = order.OwnerUserId
+                ContractorUserId = order.ContractorUserId
             };
             var result = HttpPut<OrderViewModelGet>(url, viewModel, user.AuthToken);
             Assert.AreEqual(rndString, result.Name);
         }
 
         [TestMethod]
-        public void Post_Ok_Test()
+        public void PostByCustomer_Ok_Test()
         {
             var rndString = Guid.NewGuid().ToString();
-            var user = _context.Users.First(u => u.Role == Role.PortalAdmin);
+            var customer = _context.Users.First(u => u.Role == Role.PortalAdmin);
+            var contractor = _context.Users.First(u => u.Role != Role.PortalAdmin);
+
             var url = $"api/order";
             var viewModel = new OrderViewModelPost
             {
                 Name = rndString,
                 Created = DateTimeOffset.Now,
-                ClientEmail = user.Email,
+                CustomerEmail = customer.Email,
                 Deadline = DateTimeOffset.Now.AddDays(60),
-                OwnerUserId = user.Id
+                ContractorUserId = contractor.Id
             };
-            var result = HttpPost<OrderViewModelGet>(url, viewModel, user.AuthToken);
+            var result = HttpPost<OrderViewModelGet>(url, viewModel, customer.AuthToken);
+            Assert.AreEqual(rndString, result.Name);
+        }
+
+        [TestMethod]
+        public void PostByContractor_Ok_Test()
+        {
+            var rndString = Guid.NewGuid().ToString();
+            var customer = _context.Users.First(u => u.Role == Role.PortalAdmin);
+            var contractor = _context.Users.First(u => u.Role != Role.PortalAdmin);
+
+            var url = $"api/order";
+            var viewModel = new OrderViewModelPost
+            {
+                Name = rndString,
+                Created = DateTimeOffset.Now,
+                CustomerEmail = customer.Email,
+                Deadline = DateTimeOffset.Now.AddDays(60),
+                ContractorUserId = contractor.Id
+            };
+            var result = HttpPost<OrderViewModelGet>(url, viewModel, contractor.AuthToken);
             Assert.AreEqual(rndString, result.Name);
         }
 

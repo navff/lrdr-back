@@ -41,7 +41,7 @@ namespace Tests.Operations
         public void GetByUser_Ok_Test()
         {
             var comment = _context.Comments.Include(c => c.Order).First();
-            var result = _commentOperations.GetAllByUser(comment.Order.OwnerUserId).Result;
+            var result = _commentOperations.GetAllByUser(comment.Order.ContractorUserId).Result;
             Assert.IsTrue(result.Content.Any());
         }
 
@@ -91,7 +91,7 @@ namespace Tests.Operations
             {
                 OrderId = order.Id,
                 Text = rndString,
-                UserId = order.OwnerUserId,
+                UserId = order.ContractorUserId,
                 IsReaded = false
             };
             _context.Comments.Add(comment);

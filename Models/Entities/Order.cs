@@ -20,9 +20,9 @@ namespace Models.Entities
         [StringLength(maximumLength: 255, MinimumLength = 1)]
         public string Code { get; set; }
 
-        public int OwnerUserId { get; set; }
-        [ForeignKey("OwnerUserId")]
-        public User OwnerUser { get; set; }
+        public int ContractorUserId { get; set; }
+        [ForeignKey("ContractorUserId")]
+        public User ContractorUser { get; set; }
 
         public string Name { get; set; }
 

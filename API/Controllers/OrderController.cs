@@ -85,7 +85,7 @@ namespace API.Controllers
             }
 
             var order = Mapper.Map<Order>(putViewModel);
-            var customer = await _userOperations.GetAsync(putViewModel.ClientEmail);
+            var customer = await _userOperations.GetAsync(putViewModel.CustomerEmail);
             order.CustomerUserId = customer.Id;
             order.Id = id;
             var dto = await _orderOperations.UpdateAsync(order);
@@ -101,7 +101,7 @@ namespace API.Controllers
         public async Task<IHttpActionResult> Post(OrderViewModelPost postViewModel)
         {
             var order = Mapper.Map<Order>(postViewModel);
-            var client = await _userOperations.GetAsync(postViewModel.ClientEmail);
+            var client = await _userOperations.GetAsync(postViewModel.CustomerEmail);
             order.CustomerUserId = client.Id;
             order = await _orderOperations.AddAsync(order);
             return await Get(order.Code);

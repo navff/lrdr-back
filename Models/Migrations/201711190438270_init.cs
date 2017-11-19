@@ -16,6 +16,7 @@ namespace Models.Migrations
                         Text = c.String(),
                         Time = c.DateTimeOffset(nullable: false, precision: 7),
                         OrderId = c.Int(nullable: false),
+                        IsReaded = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
@@ -29,7 +30,7 @@ namespace Models.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Code = c.String(nullable: false, maxLength: 255),
-                        OwnerUserId = c.Int(nullable: false),
+                        ContractorUserId = c.Int(nullable: false),
                         Name = c.String(),
                         Deadline = c.DateTimeOffset(nullable: false, precision: 7),
                         CustomerUserId = c.Int(nullable: false),
@@ -43,9 +44,9 @@ namespace Models.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.CustomerUserId)
-                .ForeignKey("dbo.Users", t => t.OwnerUserId)
+                .ForeignKey("dbo.Users", t => t.ContractorUserId)
                 .Index(t => t.Code, unique: true)
-                .Index(t => t.OwnerUserId)
+                .Index(t => t.ContractorUserId)
                 .Index(t => t.CustomerUserId);
             
             CreateTable(
@@ -79,6 +80,12 @@ namespace Models.Migrations
                         Extension = c.String(),
                         LinkedObjectId = c.Int(),
                         LinkedObjectType = c.Int(nullable: false),
+                        Created = c.DateTimeOffset(nullable: false, precision: 7),
+                        FormId = c.String(),
+                        Code = c.String(),
+                        Path = c.String(),
+                        PathThumb = c.String(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -87,16 +94,18 @@ namespace Models.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        OrderId = c.Int(nullable: false),
+                        OrderId = c.Int(),
                         Time = c.DateTimeOffset(nullable: false, precision: 7),
                         Sum = c.Decimal(nullable: false, precision: 18, scale: 2),
                         ExternalId = c.String(),
                         ExternalUserId = c.String(),
+                        UserId = c.Int(nullable: false),
                         Description = c.String(),
                         IsDeleted = c.Boolean(nullable: false),
+                        PaymentType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .ForeignKey("dbo.Orders", t => t.OrderId)
                 .Index(t => t.OrderId);
             
         }
@@ -105,7 +114,7 @@ namespace Models.Migrations
         {
             DropForeignKey("dbo.Payments", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Comments", "OrderId", "dbo.Orders");
-            DropForeignKey("dbo.Orders", "OwnerUserId", "dbo.Users");
+            DropForeignKey("dbo.Orders", "ContractorUserId", "dbo.Users");
             DropForeignKey("dbo.Orders", "CustomerUserId", "dbo.Users");
             DropForeignKey("dbo.Comments", "UserId", "dbo.Users");
             DropForeignKey("dbo.Users", "AvatarFileId", "dbo.Files");
@@ -116,7 +125,7 @@ namespace Models.Migrations
             DropIndex("dbo.Users", new[] { "AuthToken" });
             DropIndex("dbo.Users", new[] { "Email" });
             DropIndex("dbo.Orders", new[] { "CustomerUserId" });
-            DropIndex("dbo.Orders", new[] { "OwnerUserId" });
+            DropIndex("dbo.Orders", new[] { "ContractorUserId" });
             DropIndex("dbo.Orders", new[] { "Code" });
             DropIndex("dbo.Comments", new[] { "OrderId" });
             DropIndex("dbo.Comments", new[] { "UserId" });

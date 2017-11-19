@@ -66,7 +66,7 @@ namespace Models.Operations
             try
             {
                 var query = _context.Orders.Include(o => o.CustomerUser)
-                                           .Include(o => o.OwnerUser)
+                                           .Include(o => o.ContractorUser)
                                            .AsQueryable();
 
                 if (!String.IsNullOrEmpty(word))
@@ -75,8 +75,8 @@ namespace Models.Operations
                                             || (o.Code.ToLower().Contains(word.ToLower()))
                                             || (o.CustomerUser.Email.ToLower().Contains(word.ToLower()))
                                             || (o.CustomerUser.Name.ToLower().Contains(word.ToLower()))
-                                            || (o.OwnerUser.Email.ToLower().Contains(word.ToLower()))
-                                            || (o.OwnerUser.Name.ToLower().Contains(word.ToLower()))
+                                            || (o.ContractorUser.Email.ToLower().Contains(word.ToLower()))
+                                            || (o.ContractorUser.Name.ToLower().Contains(word.ToLower()))
                                              );
                 }
 
@@ -87,7 +87,7 @@ namespace Models.Operations
 
                 if (ownerUserId.HasValue)
                 {
-                    query = query.Where(o => o.OwnerUserId == ownerUserId.Value);
+                    query = query.Where(o => o.ContractorUserId == ownerUserId.Value);
                 }
 
                 if (isPaid == true)
@@ -116,7 +116,7 @@ namespace Models.Operations
                         query = query.OrderByDescending(o => o.Deadline);
                         break;
                     case OrderSorting.Owner:
-                        query = query.OrderBy(o => o.OwnerUser.Name);
+                        query = query.OrderBy(o => o.ContractorUser.Name);
                         break;
                     default:
                         query = query.OrderBy(o => o.Updated);
@@ -153,7 +153,7 @@ namespace Models.Operations
                 oldOrder.Created = order.Created;
                 oldOrder.CustomerUserId = order.CustomerUserId;
                 oldOrder.Deadline = order.Deadline;
-                oldOrder.OwnerUserId = order.OwnerUserId;
+                oldOrder.ContractorUserId = order.ContractorUserId;
                 oldOrder.Updated = DateTimeOffset.Now;
                 oldOrder.DeliveryAddress = order.DeliveryAddress;
                 oldOrder.IsDeleted = order.IsDeleted;
@@ -256,7 +256,7 @@ namespace Models.Operations
                     throw new NotFoundException();
                 }
 
-                if ((order.OwnerUserId == user.Id) || (user.Role == Role.PortalAdmin)) return true;
+                if ((order.ContractorUserId == user.Id) || (user.Role == Role.PortalAdmin)) return true;
                 return false;
             }
             

@@ -46,7 +46,7 @@ namespace API.Models
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        [InverseProperty("OwnerUser")]
+        [InverseProperty("ContractorUser")]
         public virtual ICollection<Order> OrdersAsOwner { get; set; }
 
         [InverseProperty("CustomerUser")]

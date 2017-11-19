@@ -9,7 +9,7 @@ namespace Models.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             AutomaticMigrationDataLossAllowed = true; // автомиграции примен¤тс¤, даже если это приведЄт к потер¤м данных
         }
 

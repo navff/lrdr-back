@@ -84,7 +84,7 @@ namespace Tests.Operations
                 DeliveryAddress = rndString,
                 IsDeleted = false,
                 Name = rndString,
-                OwnerUserId = user.Id,
+                ContractorUserId = user.Id,
                 Price = DateTimeOffset.Now.Second,
                 ShowPayment = true,
                 Status = OrderStatus.Created

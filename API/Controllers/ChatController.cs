@@ -41,7 +41,7 @@ namespace API.Controllers
             {
                 return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
-            if (user.Id != order.OwnerUserId && user.Id != order.CustomerUserId)
+            if (user.Id != order.ContractorUserId && user.Id != order.CustomerUserId)
             {
                 return new HttpResponseMessage(HttpStatusCode.Forbidden);
             }

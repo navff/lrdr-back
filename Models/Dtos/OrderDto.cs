@@ -17,8 +17,8 @@ namespace Models.Dtos
         /// </summary>
         public string Code { get; set; }
 
-        public int OwnerUserId { get; set; }
-        public User OwnerUser { get; set; }
+        public int ContractorUserId { get; set; }
+        public User ContractorUser { get; set; }
 
         public string Name { get; set; }
 
@@ -44,5 +44,15 @@ namespace Models.Dtos
         public bool ShowPayment { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// Все комменты прочитаны исполнителем
+        /// </summary>
+        public bool IsReadedByContractor { get; set; }
+
+        /// <summary>
+        /// Все комменты прочитаны заказчиком
+        /// </summary>
+        public bool IsReadedByCustomer { get; set; }
     }
 }

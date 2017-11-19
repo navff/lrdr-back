@@ -1015,7 +1015,7 @@
             В заказе есть сообщения, не прочитанные собеседником
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelPost.OwnerUserId">
+        <member name="P:API.ViewModels.OrderViewModelPost.ContractorUserId">
             <summary>
             Id пользователя, который исполняет заказ
             </summary>
@@ -1030,7 +1030,7 @@
             Дэдлайн заказа
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelPost.ClientEmail">
+        <member name="P:API.ViewModels.OrderViewModelPost.CustomerEmail">
             <summary>
             Id клиента, для которого делается заказ
             </summary>
@@ -1485,7 +1485,7 @@
         </member>
         <member name="P:API.ViewModels.YmOperationDetailsViewModel.email">
             <summary>
-            ClientEmail получателя.
+            CustomerEmail получателя.
             Для исходящих переводов
             </summary>
         </member>

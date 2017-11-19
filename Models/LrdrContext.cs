@@ -58,7 +58,7 @@ namespace Models
 
             modelBuilder.Entity<User>().HasMany(u => u.OrdersAsOwner)
                 .WithRequired()
-                .HasForeignKey(u => u.OwnerUserId)
+                .HasForeignKey(u => u.ContractorUserId)
                 .WillCascadeOnDelete(false);
         }
     }

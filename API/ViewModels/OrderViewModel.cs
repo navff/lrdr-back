@@ -168,7 +168,7 @@ namespace API.ViewModels
         /// <summary>
         /// Id пользователя, который исполняет заказ
         /// </summary>
-        public int OwnerUserId { get; set; }
+        public int ContractorUserId { get; set; }
 
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace API.ViewModels
         /// Id клиента, для которого делается заказ
         /// </summary>
         [Required]
-        public string ClientEmail { get; set; }
+        public string CustomerEmail { get; set; }
 
         /// <summary>
         /// Время создания заказа

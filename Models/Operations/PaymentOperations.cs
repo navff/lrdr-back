@@ -70,7 +70,7 @@ namespace Models.Operations
                         query = query.Where(p => p.Order.CustomerUserId == id);
                         break;
                     case PaymentSearchType.OwnerUser:
-                        query = query.Where(p => p.Order.OwnerUserId == id);
+                        query = query.Where(p => p.Order.ContractorUserId == id);
                         break;
                     case PaymentSearchType.SystemUser:
                         query = query.Where(p => p.UserId == id);
@@ -189,7 +189,7 @@ namespace Models.Operations
             if (payment.Order != null)
             {
                 if (payment.Order.CustomerUserId == user.Id) return true;
-                if (payment.Order.OwnerUserId == user.Id) return true;
+                if (payment.Order.ContractorUserId == user.Id) return true;
             }
             return false;
         }
