@@ -97,7 +97,7 @@ namespace Tests.Operations
             _userOperations.DeleteAsync(user.Email).Wait();
 
             var deletedUser = _context.Users.FirstOrDefault(u => u.Email == user.Email);
-            Assert.IsNull(deletedUser);
+            Assert.IsTrue(deletedUser.IsDeleted);
         }
 
        // [TestMethod]

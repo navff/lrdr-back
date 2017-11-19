@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Models;
+using API.Operations;
 using AutoMapper;
 using Camps.Tools;
 using Models.Dtos;
@@ -17,13 +18,16 @@ namespace Models.Operations
     {
         private LrdrContext _context;
         private CommentOperations _commentOperations;
+        private UserOperations _userOperations;
 
-        public OrderOperations(LrdrContext context, CommentOperations commentOperations)
+        public OrderOperations(LrdrContext context, CommentOperations commentOperations, UserOperations userOperations)
         {
             _context = context;
             _commentOperations = commentOperations;
+            _userOperations = userOperations;
             _commentOperations.OnModifyEventHandler += OnModifyComment;
             _commentOperations.OnDeleteEventHandler += OnDeleteComment;
+            _userOperations.OnDeleteEventHandler += OnDeleteUser;
         }
 
         /// <summary>
@@ -324,11 +328,23 @@ namespace Models.Operations
             await UpdateUpdatedDate(comment.OrderId);
         }
 
+        private async Task OnDeleteUser(object sender, User user)
+        {
+            // TODO: что сделать с заказами удалённого пользователя?
+            var userOrders = await _context.Orders.Where(o => (o.PostedByUserId == user.Id)).ToListAsync();
+            foreach (var order in userOrders)
+            {
+                order.IsDeleted = false;
+            }
+            await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             _context?.Dispose();
             _commentOperations.OnModifyEventHandler -= OnModifyComment;
             _commentOperations.OnDeleteEventHandler -= OnDeleteComment;
+            _userOperations.OnDeleteEventHandler -= OnDeleteUser;
         }
 
         //=============================================================================================================

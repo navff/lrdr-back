@@ -28,11 +28,14 @@ namespace API.Controllers
     {
         private readonly UserOperations _userOperations;
         private readonly FileOperations _fileOperations;
+        private readonly OrderOperations _orderOperations;
 
-        public UserController(UserOperations userOperations, FileOperations fileOperations)
+        public UserController(UserOperations userOperations, 
+            FileOperations fileOperations, OrderOperations orderOperations)
         {
             _userOperations = userOperations;
             _fileOperations = fileOperations;
+            _orderOperations = orderOperations;
         }
 
         /// <summary>

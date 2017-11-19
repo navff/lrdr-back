@@ -9,8 +9,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using API.Models;
+using Camps.BLL.Utilities;
 using Camps.Tools;
 using Models;
+using Models.Entities;
 using Models.Tools;
 
 namespace API.Operations
@@ -18,6 +20,8 @@ namespace API.Operations
     public class UserOperations
     {
         private LrdrContext _context;
+        public AsyncEventHandler<User> OnDeleteEventHandler { get; set; }
+
 
         public UserOperations(LrdrContext context)
         {
@@ -96,7 +100,11 @@ namespace API.Operations
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
             Contracts.Assert(user!=null);
 
-            _context.Users.Remove(user);
+            if (OnDeleteEventHandler != null)
+            {
+                await OnDeleteEventHandler.Invoke(this, user);
+            }
+            user.IsDeleted = true;
             await _context.SaveChangesAsync();
         }
 
@@ -224,5 +232,6 @@ namespace API.Operations
 
             return false;
         }
+
     }
 }

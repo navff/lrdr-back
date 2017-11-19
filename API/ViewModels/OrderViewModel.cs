@@ -172,6 +172,7 @@ namespace API.ViewModels
         /// <summary>
         /// Название заказа
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
