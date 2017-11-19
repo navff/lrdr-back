@@ -37,7 +37,11 @@ namespace Models.Operations
         {
             try
             {
-                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Code == code);
+                var order = await _context.Orders
+                                          .Include(o => o.ContractorUser)
+                                          .Include(o => o.CustomerUser)
+                                          .Include(o => o.PostedByUser)
+                                          .FirstOrDefaultAsync(o => o.Code == code);
                 var dto =  Mapper.Map<OrderDto>(order);
                 dto.IsReadedByContractor = await _context.Comments.Where(c => 
                     // комменты заказа, не созданные контрактором

@@ -17,6 +17,9 @@ namespace Models.Dtos
         /// </summary>
         public string Code { get; set; }
 
+        public int PostedByUserId { get; set; }
+        public User PostedByUser { get; set; }
+
         public int ContractorUserId { get; set; }
         public User ContractorUser { get; set; }
 
