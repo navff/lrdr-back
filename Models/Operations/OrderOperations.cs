@@ -358,7 +358,7 @@ namespace Models.Operations
             var s = new StringBuilder();
             s.Append("Здравствуйте!<br/>");
             s.AppendFormat("На сайте «LightOrder» создан для вас создан заказ. Перейдите по ссылке  " +
-                           "<a href='http://test.lrdr.ru/orders/{0}?token={1}'>ссылке</a>.<br/>", orderCode, token);
+                           "<a href='http://test.lrdr.ru/order/{0}?token={1}'>ссылке</a>.<br/>", orderCode, token);
 
             var msg = new EmailMessage()
             {
