@@ -37,8 +37,6 @@ namespace API.ViewModels
 
     public class CommentViewModelPost
     {
-        public int Id { get; set; }
-
         /// <summary>
         /// Текст комментария
         /// </summary>
