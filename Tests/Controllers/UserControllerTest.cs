@@ -112,13 +112,15 @@ namespace Tests.Controllers
                 Name = rndString,
                 Phone = rndString,
                 Role = user.Role,
-                Email = user.Email
+                Email = user.Email,
+                About = rndString
             };
 
             var result = HttpPut<UserViewModelGet>($"api/user?email={user.Email}", viewModel, user.AuthToken);
 
             Assert.AreEqual(rndString, result.Name);
             Assert.AreEqual(rndString, result.Phone);
+            Assert.AreEqual(rndString, result.About);
 
         }
 
