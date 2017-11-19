@@ -940,14 +940,14 @@
             Удалён в корзину
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelGet.IsUnreadByMe">
+        <member name="P:API.ViewModels.OrderViewModelGet.IsReadedByContractor">
             <summary>
-            В заказе есть сообщения, не прочитанные мной
+            В заказе есть сообщения, не прочитанные исполнителем
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelGet.IsUnreadByCompanion">
+        <member name="P:API.ViewModels.OrderViewModelGet.IsReadedByCustomer">
             <summary>
-            В заказе есть сообщения, не прочитанные собеседником
+            В заказе есть сообщения, не прочитанные клиентом
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderShortViewModelGet.Code">

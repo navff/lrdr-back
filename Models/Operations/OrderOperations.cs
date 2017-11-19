@@ -34,7 +34,20 @@ namespace Models.Operations
             try
             {
                 var order = await _context.Orders.FirstOrDefaultAsync(o => o.Code == code);
-                return Mapper.Map<OrderDto>(order);
+                var dto =  Mapper.Map<OrderDto>(order);
+                dto.IsReadedByContractor = await _context.Comments.Where(c => 
+                    // комменты заказа, не созданные контрактором
+                    (c.OrderId == order.Id) && (c.UserId != order.ContractorUserId))
+                    // прочитаны
+                    .AllAsync(c => (c.IsReaded));
+
+                dto.IsReadedByCustomer = await _context.Comments.Where(c =>
+                    // комменты заказа, не созданные клиентом
+                    (c.OrderId == order.Id) && (c.UserId != order.CustomerUserId))
+                    // прочитаны
+                    .AllAsync(c => (c.IsReaded));
+
+                return dto;
             }
             catch (Exception e)
             {

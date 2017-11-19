@@ -81,14 +81,14 @@ namespace API.ViewModels
         public bool IsDeleted { get; set; }
 
         /// <summary>
-        /// В заказе есть сообщения, не прочитанные мной
+        /// В заказе есть сообщения, не прочитанные исполнителем
         /// </summary>
-        public bool IsUnreadByMe { get; set; }
+        public bool IsReadedByContractor { get; set; }
 
         /// <summary>
-        /// В заказе есть сообщения, не прочитанные собеседником
+        /// В заказе есть сообщения, не прочитанные клиентом
         /// </summary>
-        public bool IsUnreadByCompanion { get; set; }
+        public bool IsReadedByCustomer{ get; set; }
     }
 
     public class OrderShortViewModelGet
