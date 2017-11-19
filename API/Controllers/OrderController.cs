@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
 using API.Common;
+using API.Models;
 using API.Operations;
 using API.ViewModels;
 using AutoMapper;
@@ -102,7 +103,28 @@ namespace API.Controllers
         {
             var order = Mapper.Map<Order>(postViewModel);
             var client = await _userOperations.GetAsync(postViewModel.CustomerEmail);
+            if (client == null)
+            {
+                client = await _userOperations.AddAsync(new User
+                {
+                    Email = postViewModel.CustomerEmail,
+                    AuthToken = Guid.NewGuid().ToString(),
+                    DateRegistered = DateTimeOffset.Now,
+                    Role = Role.RegisteredUser,
+                });
+                // TODO: написать письмо клиенту о том, что для него лежит заказик
+
+            }
+            if ( (postViewModel.ContractorUserId == 0) &&
+                 (User.Identity.Name.ToLower() != postViewModel.CustomerEmail.ToLower()))
+            {
+                var contractor = await _userOperations.GetAsync(User.Identity.Name);
+                order.ContractorUserId = contractor.Id;
+            }
+
             order.CustomerUserId = client.Id;
+            var currentUser = await _userOperations.GetAsync(User.Identity.Name);
+            order.PostedByUserId = currentUser.Id;
             order = await _orderOperations.AddAsync(order);
             return await Get(order.Code);
         }

@@ -54,7 +54,10 @@ namespace API.Models
         [InverseProperty("CustomerUser")]
         public virtual ICollection<Order> OrdersAsCustomer { get; set; }
 
-        
+        [InverseProperty("PostedByUser")]
+        public virtual ICollection<Order> PostedOrders { get; set; }
+
+
     }
 
     public enum Role

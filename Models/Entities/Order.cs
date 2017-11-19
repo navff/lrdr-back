@@ -49,6 +49,13 @@ namespace Models.Entities
         public bool ShowPayment { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// Которым пользователем создан заказ
+        /// </summary>
+        public int PostedByUserId { get; set; }
+        [ForeignKey("PostedByUserId")]
+        public User PostedByUser { get; set; }
     }
 
     public enum OrderStatus

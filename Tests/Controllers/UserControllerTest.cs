@@ -75,7 +75,7 @@ namespace Tests.Controllers
             Assert.IsFalse(result.Any());
         }
 
-        [TestMethod]
+       // [TestMethod]
         public void HTTP_Delete_OK_Test()
         {
             var userForDelete = _context.Users.Take(100).ToList().Last();

@@ -20,9 +20,10 @@ namespace API.ViewModels
         public string Code { get; set; }
 
         /// <summary>
-        /// Id пользователя, который создал заказ
+        /// Пользователь-создатель
         /// </summary>
-        public int ContractorUserId { get; set; }
+        public UserViewModelGet PostedByUser { get; set; }
+
 
         /// <summary>
         /// Пользователь-исполнитель
@@ -39,10 +40,6 @@ namespace API.ViewModels
         /// </summary>
         public DateTimeOffset Deadline { get; set; }
 
-        /// <summary>
-        /// Id клиента, для которого делается заказ
-        /// </summary>
-        public int? CustomerUserId { get; set; }
 
         /// <summary>
         /// Клиент для которого делается заказ

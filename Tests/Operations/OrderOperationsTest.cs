@@ -87,7 +87,8 @@ namespace Tests.Operations
                 ContractorUserId = user.Id,
                 Price = DateTimeOffset.Now.Second,
                 ShowPayment = true,
-                Status = OrderStatus.Created
+                Status = OrderStatus.Created,
+                PostedByUserId = user.Id
             };
             var result = _orderOperations.AddAsync(order).Result;
             Assert.AreEqual(rndString, result.DeliveryAddress);

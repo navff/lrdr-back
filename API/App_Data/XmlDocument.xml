@@ -879,9 +879,9 @@
             GUID-код, который будет в адресной строке
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelGet.ContractorUserId">
+        <member name="P:API.ViewModels.OrderViewModelGet.PostedByUser">
             <summary>
-            Id пользователя, который создал заказ
+            Пользователь-создатель
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderViewModelGet.ContractorUser">
@@ -897,11 +897,6 @@
         <member name="P:API.ViewModels.OrderViewModelGet.Deadline">
             <summary>
             Дэдлайн заказа
-            </summary>
-        </member>
-        <member name="P:API.ViewModels.OrderViewModelGet.CustomerUserId">
-            <summary>
-            Id клиента, для которого делается заказ
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderViewModelGet.CustomerUser">

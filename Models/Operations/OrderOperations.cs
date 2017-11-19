@@ -330,7 +330,30 @@ namespace Models.Operations
             _commentOperations.OnModifyEventHandler -= OnModifyComment;
             _commentOperations.OnDeleteEventHandler -= OnDeleteComment;
         }
+
+        //=============================================================================================================
+        //Отправка мейла
+        private static bool SendEmail_NewOrder(string token, int orderId, string to)
+        {
+            var s = new StringBuilder();
+            s.Append("Здравствуйте!<br/>");
+            s.AppendFormat("На сайте «LightOrder» создан для вас создан заказ. Перейдите по ссылке  " +
+                           "<a href='https://test.lrdr.ru/orders/{0}?token={1}'>ссылке</a>.<br/>", orderId, token);
+
+            var msg = new EmailMessage()
+            {
+                From = "LightOrder <site@mhbb.ru>",
+                To = to,
+                Body = s.ToString(),
+                EmailSubject = UserMessages.SubjectNewOrder
+            };
+
+            return EmailService.SendEmail(msg);
+        }
+
     }
+
+
 
     public enum OrderSorting
     {

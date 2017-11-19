@@ -60,6 +60,11 @@ namespace Models
                 .WithRequired()
                 .HasForeignKey(u => u.ContractorUserId)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>().HasMany(u => u.PostedOrders)
+                .WithRequired()
+                .HasForeignKey(u => u.PostedByUserId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

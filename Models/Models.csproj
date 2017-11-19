@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201711190626410_add_user_about.Designer.cs">
       <DependentUpon>201711190626410_add_user_about.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711191000183_add_order_posted_by_field.cs" />
+    <Compile Include="Migrations\201711191000183_add_order_posted_by_field.Designer.cs">
+      <DependentUpon>201711191000183_add_order_posted_by_field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Operations\CommentOperations.cs" />
     <Compile Include="Operations\FileOperations.cs" />
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711190626410_add_user_about.resx">
       <DependentUpon>201711190626410_add_user_about.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711191000183_add_order_posted_by_field.resx">
+      <DependentUpon>201711191000183_add_order_posted_by_field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -84,7 +84,7 @@ namespace API.Operations
             Contracts.Assert(user!=null);
             Contracts.Assert(!String.IsNullOrEmpty(user.AuthToken));
             Contracts.Assert(!String.IsNullOrEmpty(user.Email));
-            Contracts.Assert(!String.IsNullOrEmpty(user.Phone));
+            //Contracts.Assert(!String.IsNullOrEmpty(user.Phone));
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
