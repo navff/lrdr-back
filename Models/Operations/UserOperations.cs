@@ -187,7 +187,7 @@ namespace API.Operations
         {
             var dto = new EmailMessage()
             {
-                From = "Моё хобби <site@mhbb.ru>",
+                From = "Light Order <site@mhbb.ru>",
                 To = to,
                 Body = GenerateEmailBody(token),
                 EmailSubject = UserMessages.SubjectConfirmEmail
