@@ -25,6 +25,11 @@ namespace API.ViewModels
         public int OrderId { get; set; }
 
         /// <summary>
+        /// Коммент прочитан пользователем, которому был отправлен
+        /// </summary>
+        public bool IsReaded { get; set; }
+
+        /// <summary>
         /// Пользователь, который оставил коммент
         /// </summary>
         public UserViewModelShortGet User { get; set; }

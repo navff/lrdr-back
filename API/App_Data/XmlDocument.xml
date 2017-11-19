@@ -592,6 +592,11 @@
             Обновляет текст коммента
             </summary>
         </member>
+        <member name="M:API.Controllers.CommentController.SetAsRead(System.Int32)">
+            <summary>
+            Помечает коммент как прочитанный
+            </summary>
+        </member>
         <member name="M:API.Controllers.CommentController.Post(API.ViewModels.CommentViewModelPost)">
             <summary>
             Добавляет коммент
@@ -752,6 +757,11 @@
         <member name="P:API.ViewModels.CommentViewModelGet.OrderId">
             <summary>
             Заказ, к которому относится коммент
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.CommentViewModelGet.IsReaded">
+            <summary>
+            Коммент прочитан пользователем, которому был отправлен
             </summary>
         </member>
         <member name="P:API.ViewModels.CommentViewModelGet.User">
@@ -930,6 +940,16 @@
             Удалён в корзину
             </summary>
         </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.IsUnreadByMe">
+            <summary>
+            В заказе есть сообщения, не прочитанные мной
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderViewModelGet.IsUnreadByCompanion">
+            <summary>
+            В заказе есть сообщения, не прочитанные собеседником
+            </summary>
+        </member>
         <member name="P:API.ViewModels.OrderShortViewModelGet.Code">
             <summary>
             GUID-код, который будет в адресной строке
@@ -983,6 +1003,16 @@
         <member name="P:API.ViewModels.OrderShortViewModelGet.IsDeleted">
             <summary>
             Удалён в корзину
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.IsUnreadByMe">
+            <summary>
+            В заказе есть сообщения, не прочитанные мной
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.OrderShortViewModelGet.IsUnreadByCompanion">
+            <summary>
+            В заказе есть сообщения, не прочитанные собеседником
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderViewModelPost.OwnerUserId">

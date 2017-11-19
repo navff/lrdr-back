@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http.Dependencies;
 using API.Operations;
 using Models;
+using Models.Operations;
 using Ninject;
 using Ninject.Web.Common;
 
@@ -32,6 +33,10 @@ namespace API.Common
 
         private void AddBindings()
         {
+            kernel.Bind<OrderOperations>().ToSelf().InRequestScope();
+            kernel.Bind<CommentOperations>().ToSelf().InRequestScope();
+            kernel.Bind<FileOperations>().ToSelf().InRequestScope();
+            kernel.Bind<PaymentOperations>().ToSelf().InRequestScope();
             kernel.Bind<UserOperations>().ToSelf().InRequestScope();
             kernel.Bind<LrdrContext>().ToSelf().InRequestScope();
         }

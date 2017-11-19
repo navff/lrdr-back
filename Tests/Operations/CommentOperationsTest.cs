@@ -81,5 +81,26 @@ namespace Tests.Operations
                 Assert.IsNull(cntxt.Comments.FirstOrDefault(c => c.Id == comment.Id));
             }
         }
+
+        [TestMethod]
+        public void SetAsRead_Ok_Test()
+        {
+            var order = _context.Orders.First();
+            var rndString = Guid.NewGuid().ToString();
+            var comment = new Comment
+            {
+                OrderId = order.Id,
+                Text = rndString,
+                UserId = order.OwnerUserId,
+                IsReaded = false
+            };
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            var customerUser = _context.Users.First(u => u.Id == order.CustomerUserId);
+            var result = _commentOperations.SetAsRead(comment.Id, customerUser.Email).Result;
+            Assert.IsTrue(result.IsReaded);
+        }
+
     }
 }

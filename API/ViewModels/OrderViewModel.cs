@@ -79,6 +79,16 @@ namespace API.ViewModels
         /// Удалён в корзину
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// В заказе есть сообщения, не прочитанные мной
+        /// </summary>
+        public bool IsUnreadByMe { get; set; }
+
+        /// <summary>
+        /// В заказе есть сообщения, не прочитанные собеседником
+        /// </summary>
+        public bool IsUnreadByCompanion { get; set; }
     }
 
     public class OrderShortViewModelGet
@@ -140,6 +150,16 @@ namespace API.ViewModels
         /// Удалён в корзину
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// В заказе есть сообщения, не прочитанные мной
+        /// </summary>
+        public bool IsUnreadByMe { get; set; }
+
+        /// <summary>
+        /// В заказе есть сообщения, не прочитанные собеседником
+        /// </summary>
+        public bool IsUnreadByCompanion { get; set; }
     }
 
     public class OrderViewModelPost

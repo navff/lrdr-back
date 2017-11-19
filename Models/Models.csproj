@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\OrderDto.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\File.cs" />
     <Compile Include="Entities\Order.cs" />

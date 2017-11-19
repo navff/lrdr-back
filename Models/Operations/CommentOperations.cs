@@ -166,5 +166,31 @@ namespace Models.Operations
 
             return await OrderOperations.CheckRights(comment.OrderId, userEmail);
         }
+
+        /// <summary>
+        /// Устанавливает коммент как прочитанный текущим пользователем.
+        /// </summary>
+        /// <param name="commentId">Id коммента</param>
+        /// <param name="userEmail">Почта пользователя, который пытается пометить коммент прочитанным</param>
+        public async Task<Comment> SetAsRead(int commentId, string userEmail)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+            if (user == null)
+            {
+                throw new NotFoundException();
+            }
+
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+            if (comment == null)
+            {
+                throw new NotFoundException();
+            }
+
+            if (comment.UserId == user.Id) return await GetAsync(commentId);
+
+            comment.IsReaded = true;
+            await _context.SaveChangesAsync();
+            return await GetAsync(commentId);
+        }
     }
 }

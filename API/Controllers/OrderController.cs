@@ -10,6 +10,7 @@ using API.Common;
 using API.Operations;
 using API.ViewModels;
 using AutoMapper;
+using Models.Dtos;
 using Models.Entities;
 using Models.Operations;
 using Models.Tools;
@@ -84,11 +85,11 @@ namespace API.Controllers
             }
 
             var order = Mapper.Map<Order>(putViewModel);
-            var client = await _userOperations.GetAsync(putViewModel.ClientEmail);
-            order.CustomerUserId = client.Id;
+            var customer = await _userOperations.GetAsync(putViewModel.ClientEmail);
+            order.CustomerUserId = customer.Id;
             order.Id = id;
-            order = await _orderOperations.UpdateAsync(order);
-            return await Get(order.Code);
+            var dto = await _orderOperations.UpdateAsync(order);
+            return await Get(dto.Code);
         }
 
         /// <summary>

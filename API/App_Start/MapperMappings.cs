@@ -2,6 +2,7 @@
 using API.Models;
 using API.ViewModels;
 using AutoMapper;
+using Models.Dtos;
 using Models.Entities;
 using Models.HelpClasses;
 using Models.Operations;
@@ -36,6 +37,12 @@ namespace API
                 cfg.CreateMap<PageViewDTO<Payment>, PageView<PaymentViewModelGet>>();
                 cfg.CreateMap<File, FileDto>();
                 cfg.CreateMap<FileDto, FileViewModelGet>();
+
+                // Models to Dtos
+                cfg.CreateMap<Order, OrderDto>();
+
+                // Dto to ViewModel
+                cfg.CreateMap<OrderDto, OrderViewModelGet>();
 
 
                 // ViewModels to Models

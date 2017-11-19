@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Models;
+using AutoMapper;
 using Camps.Tools;
+using Models.Dtos;
 using Models.Entities;
 using Models.Tools;
 
@@ -27,11 +29,12 @@ namespace Models.Operations
         /// <summary>
         /// Получает закакз по GUID
         /// </summary>
-        public async Task<Order> GetAsync(string code)
+        public async Task<OrderDto> GetAsync(string code)
         {
             try
             {
-                return await _context.Orders.FirstOrDefaultAsync(o => o.Code == code);
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Code == code);
+                return Mapper.Map<OrderDto>(order);
             }
             catch (Exception e)
             {
@@ -40,11 +43,12 @@ namespace Models.Operations
             }
         }
 
-        public async Task<Order> GetAsync(int id)
+        public async Task<OrderDto> GetAsync(int id)
         {
             try
             {
-                return await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+                return Mapper.Map<OrderDto>(order);
             }
             catch (Exception e)
             {
@@ -140,11 +144,11 @@ namespace Models.Operations
             }
         }
 
-        public async Task<Order> UpdateAsync(Order order)
+        public async Task<OrderDto> UpdateAsync(Order order)
         {
             try
             {
-                var oldOrder = await GetAsync(order.Id);
+                var oldOrder = _context.Orders.First(o => o.Id == order.Id);
                 //oldOrder.Code = order.Code;
                 oldOrder.Created = order.Created;
                 oldOrder.CustomerUserId = order.CustomerUserId;
@@ -157,9 +161,9 @@ namespace Models.Operations
                 //oldOrder.Price = order.Price;
                 //oldOrder.Status = order.Status;
                 oldOrder.ShowPayment = order.ShowPayment;
-
                 await _context.SaveChangesAsync();
-                return oldOrder;
+
+                return await GetAsync(order.Id);
             }
             catch (Exception e)
             {
@@ -190,7 +194,7 @@ namespace Models.Operations
         {
             try
             {
-                var order = await GetAsync(id);
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
                 _context.Orders.Remove(order);
                 await _context.SaveChangesAsync();
             }
@@ -201,15 +205,15 @@ namespace Models.Operations
             }
         }
 
-        public async Task<Order> ChangePriceAsync(int orderId, Decimal newPrice)
+        public async Task<OrderDto> ChangePriceAsync(int orderId, Decimal newPrice)
         {
             try
             {
-                var order = await GetAsync(orderId);
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId); 
                 order.Price = newPrice;
                 order.Updated = DateTimeOffset.Now;
                 await _context.SaveChangesAsync();
-                return order;
+                return await GetAsync(orderId);
 
             }
             catch (Exception e)
@@ -219,15 +223,15 @@ namespace Models.Operations
             }
         }
 
-        public async Task<Order> ChangeStatusAsync(int orderId, OrderStatus newStatus)
+        public async Task<OrderDto> ChangeStatusAsync(int orderId, OrderStatus newStatus)
         {
             try
             {
-                var order = await GetAsync(orderId);
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
                 order.Status = newStatus;
                 order.Updated = DateTimeOffset.Now;
                 await _context.SaveChangesAsync();
-                return order;
+                return await GetAsync(orderId);
             }
             catch (Exception e)
             {
@@ -260,7 +264,7 @@ namespace Models.Operations
 
         public async Task UpdateUpdatedDate(int orderId)
         {
-            var order = await GetAsync(orderId);
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId); ;
             if (order == null)
             {
                 throw new NotFoundException();
@@ -283,6 +287,7 @@ namespace Models.Operations
         {
             _context?.Dispose();
             _commentOperations.OnModifyEventHandler -= OnModifyComment;
+            _commentOperations.OnDeleteEventHandler -= OnDeleteComment;
         }
     }
 

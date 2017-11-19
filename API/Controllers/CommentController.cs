@@ -20,11 +20,14 @@ namespace API.Controllers
     {
         private CommentOperations _commentOperations;
         private UserOperations _userOperations;
+        private OrderOperations _orderOperations;
 
-        public CommentController(CommentOperations commentOperations, UserOperations userOperations)
+        public CommentController(CommentOperations commentOperations, 
+            UserOperations userOperations, OrderOperations orderOperations)
         {
             _commentOperations = commentOperations;
             _userOperations = userOperations;
+            _orderOperations = orderOperations;
         }
 
         /// <summary>
@@ -107,6 +110,23 @@ namespace API.Controllers
             if (!canEdit) return this.Result403("You haven't rights to edit this comment");
 
             await _commentOperations.UpdateAsync(id, putViewModel.Text);
+            return await Get(id);
+        }
+
+        /// <summary>
+        /// Помечает коммент как прочитанный
+        /// </summary>
+        [HttpPut]
+        [Route("{id}/read")]
+        [RESTAuthorize]
+        [ResponseType(typeof(CommentViewModelGet))]
+        public async Task<IHttpActionResult> SetAsRead(int id)
+        {
+            var canEdit = await _commentOperations.CheckRights(id, User.Identity.Name);
+            if (!canEdit) return this.Result403("You haven't rights to edit this comment");
+            
+
+            await _commentOperations.SetAsRead(id, User.Identity.Name);
             return await Get(id);
         }
 
