@@ -60,7 +60,6 @@ namespace Tests.Controllers
             var viewModel = new OrderViewModelPost
             {
                 Name = rndString,
-                Created = order.Created,
                 CustomerEmail = order.CustomerUser.Email,
                 Deadline = order.Deadline,
                 ContractorUserId = order.ContractorUserId
@@ -80,7 +79,6 @@ namespace Tests.Controllers
             var viewModel = new OrderViewModelPost
             {
                 Name = rndString,
-                Created = DateTimeOffset.Now,
                 CustomerEmail = customer.Email,
                 Deadline = DateTimeOffset.Now.AddDays(60),
                 ContractorUserId = contractor.Id
@@ -100,10 +98,10 @@ namespace Tests.Controllers
             var viewModel = new OrderViewModelPost
             {
                 Name = rndString,
-                Created = DateTimeOffset.Now,
                 CustomerEmail = customer.Email,
                 Deadline = DateTimeOffset.Now.AddDays(60),
-                ContractorUserId = contractor.Id
+                ContractorUserId = contractor.Id,
+                DeliveryAddress = rndString
             };
             var result = HttpPost<OrderViewModelGet>(url, viewModel, contractor.AuthToken);
             Assert.AreEqual(rndString, result.Name);

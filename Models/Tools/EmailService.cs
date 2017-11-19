@@ -19,19 +19,22 @@ namespace Models.Tools
         {
             try
             {
-                var msg = new MailMessage();
-                msg.From = new MailAddress(message.From);
-                msg.To.Add(new MailAddress(message.To));
-                msg.Subject = message.EmailSubject;
-                //Добавляем текстовое и html представление для разных клиентов
-                msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Plain));
-                msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html));
-                var smtpClient = new SmtpClient("smtp-pulse.com", Convert.ToInt32(2525));
-                var credentials = new NetworkCredential("var@33kita.ru", "J9FnHkWjK8H3br");
-                smtpClient.Credentials = credentials;
-                smtpClient.EnableSsl = false;
-                smtpClient.Send(msg);
-                smtpClient.Dispose();
+                Task task = Task.Factory.StartNew(() =>
+                {
+                    var msg = new MailMessage();
+                    msg.From = new MailAddress(message.From);
+                    msg.To.Add(new MailAddress(message.To));
+                    msg.Subject = message.EmailSubject;
+                    //Добавляем текстовое и html представление для разных клиентов
+                    msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Plain));
+                    msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Html));
+                    var smtpClient = new SmtpClient("smtp-pulse.com", Convert.ToInt32(2525));
+                    var credentials = new NetworkCredential("var@33kita.ru", "J9FnHkWjK8H3br");
+                    smtpClient.Credentials = credentials;
+                    smtpClient.EnableSsl = false;
+                    smtpClient.Send(msg);
+                    smtpClient.Dispose();
+                });
                 return true;
             }
             catch (SmtpException ex)
@@ -54,5 +57,7 @@ namespace Models.Tools
     {
         public static readonly string SubjectConfirmEmail = "Пожалуйста подтвердите Ваш E-mail";
         public static readonly string SubjectConfirmLogin = "Подтвердите вход на сайт «Light Order»";
+        public static readonly string SubjectNewOrder = "Новый заказ на LightOrder";
+        public static readonly string SubjectNewComment = "Новый заказ на LightOrder";
     }
 }

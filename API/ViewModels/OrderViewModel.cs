@@ -81,14 +81,14 @@ namespace API.ViewModels
         public bool IsDeleted { get; set; }
 
         /// <summary>
-        /// В заказе есть сообщения, не прочитанные исполнителем
+        /// Все сообщения заказа прочитаны исполнителем
         /// </summary>
         public bool IsReadedByContractor { get; set; }
 
         /// <summary>
-        /// В заказе есть сообщения, не прочитанные клиентом
+        /// Все сообщения заказа прочитаны клиентом
         /// </summary>
-        public bool IsReadedByCustomer{ get; set; }
+        public bool IsReadedByCustomer { get; set; }
     }
 
     public class OrderShortViewModelGet
@@ -151,15 +151,16 @@ namespace API.ViewModels
         /// </summary>
         public bool IsDeleted { get; set; }
 
-        /// <summary>
-        /// В заказе есть сообщения, не прочитанные мной
-        /// </summary>
-        public bool IsUnreadByMe { get; set; }
 
         /// <summary>
-        /// В заказе есть сообщения, не прочитанные собеседником
+        /// Все сообщения заказа прочитаны исполнителем
         /// </summary>
-        public bool IsUnreadByCompanion { get; set; }
+        public bool IsReadedByContractor { get; set; }
+
+        /// <summary>
+        /// Все сообщения заказа прочитаны клиентом
+        /// </summary>
+        public bool IsReadedByCustomer { get; set; }
     }
 
     public class OrderViewModelPost
@@ -188,9 +189,9 @@ namespace API.ViewModels
         public string CustomerEmail { get; set; }
 
         /// <summary>
-        /// Время создания заказа
+        /// Адрес доставки
         /// </summary>
-        public DateTimeOffset Created { get; set; }
+        public String DeliveryAddress { get; set; }
 
     }
 

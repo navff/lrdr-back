@@ -70,7 +70,7 @@ namespace Models.Operations
             }
         }
 
-        public async Task<PageViewDTO<Order>> SearchAsync(string word="", int? customerUserId=null,
+        public async Task<PageViewDTO<OrderDto>> SearchAsync(string word="", int? customerUserId=null,
                                                           int? contractorUserId = null,
                                                           bool? isPaid = null,
                                                           OrderSorting sortby=OrderSorting.Updated, 
@@ -139,8 +139,36 @@ namespace Models.Operations
                 var total = query.Count();
                 var result=  await query.Skip(ModelsSettings.PAGE_SIZE * (page - 1))
                     .Take(ModelsSettings.PAGE_SIZE)
+                    .Select(o => new OrderDto
+                    {
+                        Id = o.Id,
+                        CustomerUserId = o.CustomerUserId,
+                        Name = o.Name,
+                        CustomerUser = o.CustomerUser,
+                        Status = o.Status,
+                        ContractorUserId = o.ContractorUserId,
+                        Code = o.Code,
+                        ContractorUser = o.ContractorUser,
+                        Created = o.Created,
+                        Deadline = o.Deadline,
+                        DeliveryAddress = o.DeliveryAddress,
+                        IsDeleted = o.IsDeleted,
+                        Price = o.Price,
+                        ShowPayment = o.ShowPayment,
+                        Updated = o.Updated,
+                        IsReadedByContractor = _context.Comments.Where(c =>
+                                // комменты заказа, не созданные контрактором
+                                (c.OrderId == o.Id) && (c.UserId != o.ContractorUserId))
+                                // прочитаны
+                                .All(c => (c.IsReaded)),
+                        IsReadedByCustomer = _context.Comments.Where(c =>
+                                // комменты заказа, не созданные контрактором
+                                    (c.OrderId == o.Id) && (c.UserId != o.CustomerUserId))
+                            // прочитаны
+                            .All(c => (c.IsReaded))
+                    })
                     .ToListAsync();
-                return new PageViewDTO<Order>
+                return new PageViewDTO<OrderDto>
                 {
                     Content = result,
                     PageNumber = page,

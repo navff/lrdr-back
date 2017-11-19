@@ -43,7 +43,8 @@ namespace API
 
                 // Dto to ViewModel
                 cfg.CreateMap<OrderDto, OrderViewModelGet>();
-
+                cfg.CreateMap<OrderDto, OrderShortViewModelGet>();
+                cfg.CreateMap<PageViewDTO<OrderDto>, PageView<OrderShortViewModelGet>>();
 
                 // ViewModels to Models
                 cfg.CreateMap<UserViewModelPut, User>();

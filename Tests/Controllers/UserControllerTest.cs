@@ -149,11 +149,11 @@ namespace Tests.Controllers
             var rndString = Guid.NewGuid().ToString();
             var viewModel = new UserRegisterViewModel
             {
-                Email = rndString+"@33kita.ru"
+                Email = rndString+"@mhbb.ru"
             };
             var result = HttpPost<UserViewModelGet>($"api/user", viewModel);
 
-            Assert.AreEqual(rndString+"@33kita.ru", result.Email);
+            Assert.AreEqual(rndString+ "@mhbb.ru", result.Email);
         }
 
         [TestMethod]

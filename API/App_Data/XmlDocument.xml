@@ -942,12 +942,12 @@
         </member>
         <member name="P:API.ViewModels.OrderViewModelGet.IsReadedByContractor">
             <summary>
-            В заказе есть сообщения, не прочитанные исполнителем
+            Все сообщения заказа прочитаны исполнителем
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderViewModelGet.IsReadedByCustomer">
             <summary>
-            В заказе есть сообщения, не прочитанные клиентом
+            Все сообщения заказа прочитаны клиентом
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderShortViewModelGet.Code">
@@ -1005,14 +1005,14 @@
             Удалён в корзину
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderShortViewModelGet.IsUnreadByMe">
+        <member name="P:API.ViewModels.OrderShortViewModelGet.IsReadedByContractor">
             <summary>
-            В заказе есть сообщения, не прочитанные мной
+            Все сообщения заказа прочитаны исполнителем
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderShortViewModelGet.IsUnreadByCompanion">
+        <member name="P:API.ViewModels.OrderShortViewModelGet.IsReadedByCustomer">
             <summary>
-            В заказе есть сообщения, не прочитанные собеседником
+            Все сообщения заказа прочитаны клиентом
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderViewModelPost.ContractorUserId">
@@ -1035,9 +1035,9 @@
             Id клиента, для которого делается заказ
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelPost.Created">
+        <member name="P:API.ViewModels.OrderViewModelPost.DeliveryAddress">
             <summary>
-            Время создания заказа
+            Адрес доставки
             </summary>
         </member>
         <member name="T:API.ViewModels.PageView`1">
