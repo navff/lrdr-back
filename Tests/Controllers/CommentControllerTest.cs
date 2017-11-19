@@ -56,7 +56,6 @@ namespace Tests.Controllers
             var viewModel = new CommentViewModelPost
             {
                 OrderId = comment.OrderId,
-                Id = comment.OrderId,
                 Text = rndString,
             };
             var url = $"api/comment";
