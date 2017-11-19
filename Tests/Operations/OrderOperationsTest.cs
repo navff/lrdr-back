@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API;
+using API.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using Models.Entities;
 using Models.Operations;
+using Ninject;
 
 namespace Tests.Operations
 {
@@ -17,7 +20,11 @@ namespace Tests.Operations
 
         public OrderOperationsTest()
         {
-            _orderOperations = new OrderOperations(_context);
+            var kernel = new StandardKernel();
+            new NinjectDependencyResolver(kernel);
+            _orderOperations = kernel.Get<OrderOperations>();
+            MapperMappings.Map();
+            
         }
 
         [TestMethod]

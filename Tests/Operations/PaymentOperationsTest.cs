@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models.Operations;
 using System.Data.Entity;
+using API.Common;
 using API.Operations;
 using Models;
 using Models.Entities;
+using Ninject;
 
 namespace Tests.Operations
 {
@@ -19,9 +21,9 @@ namespace Tests.Operations
 
         public PaymentOperationsTest()
         {
-            var orderOperations = new OrderOperations(_context);
-            var userOperations = new UserOperations(_context);
-            _paymentOperations = new PaymentOperations(_context, orderOperations, userOperations);
+            var kernel = new StandardKernel();
+            new NinjectDependencyResolver(kernel);
+            _paymentOperations = kernel.Get<PaymentOperations>();
         }
 
         [TestMethod]

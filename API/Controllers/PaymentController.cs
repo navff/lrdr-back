@@ -77,7 +77,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    var canRead = await _orderOperations.CheckRights(id.Value, User.Identity.Name);
+                    var canRead = await OrderOperations.CheckRights(id.Value, User.Identity.Name);
                     if (!canRead) return this.Result403("You haven't rights to see payments for other user orders");
                 }
                 
@@ -98,7 +98,7 @@ namespace API.Controllers
         {
             if (!User.IsInRole("PortalAdmin") && !User.IsInRole("PortalManager"))
             {
-                var canEdit = await _orderOperations.CheckRights(putViewModel.OrderId.Value, User.Identity.Name);
+                var canEdit = await OrderOperations.CheckRights(putViewModel.OrderId.Value, User.Identity.Name);
                 if (!canEdit) return this.Result403("You haven't rights to add payments this order");
             }
 
@@ -115,7 +115,7 @@ namespace API.Controllers
         {
             if (!User.IsInRole("PortalAdmin") && !User.IsInRole("PortalManager"))
             {
-                var canEdit = await _orderOperations.CheckRights(postViewModel.OrderId.Value, User.Identity.Name);                
+                var canEdit = await OrderOperations.CheckRights(postViewModel.OrderId.Value, User.Identity.Name);                
                 if (!canEdit) return this.Result403("You haven't rights to add payments this order");
             }
 

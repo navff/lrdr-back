@@ -13,6 +13,7 @@ namespace Models.Entities
         public string Text { get; set; }
         public DateTimeOffset Time { get; set; }
         public int  OrderId { get; set; }
+        public bool Readed { get; set; }
 
 
         public User User { get; set; }

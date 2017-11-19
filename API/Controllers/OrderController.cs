@@ -75,7 +75,7 @@ namespace API.Controllers
         {
             try
             {
-                bool canEdit = await _orderOperations.CheckRights(id, User.Identity.Name);
+                bool canEdit = await OrderOperations.CheckRights(id, User.Identity.Name);
                 if (!canEdit) return this.Result403("You have no rights to edit this order");
             }
             catch (NotFoundException ex)
@@ -117,7 +117,7 @@ namespace API.Controllers
         {
             try
             {
-                bool canEdit = await _orderOperations.CheckRights(id, User.Identity.Name);
+                bool canEdit = await OrderOperations.CheckRights(id, User.Identity.Name);
                 if (!canEdit) return this.Result403("You have no rights to edit this order");
             }
             catch (NotFoundException ex)
@@ -139,7 +139,7 @@ namespace API.Controllers
         {
             try
             {
-                bool canEdit = await _orderOperations.CheckRights(orderChangePriceViewModel.OrderId, User.Identity.Name);
+                bool canEdit = await OrderOperations.CheckRights(orderChangePriceViewModel.OrderId, User.Identity.Name);
                 if (!canEdit) return this.Result403("You have no rights to edit this order");
             }
             catch (NotFoundException ex)
@@ -162,7 +162,7 @@ namespace API.Controllers
         {
             try
             {
-                bool canEdit = await _orderOperations.CheckRights(orderChangeStatusViewModel.OrderId, User.Identity.Name);
+                bool canEdit = await OrderOperations.CheckRights(orderChangeStatusViewModel.OrderId, User.Identity.Name);
                 if (!canEdit) return this.Result403("You have no rights to edit this order");
             }
             catch (NotFoundException ex)

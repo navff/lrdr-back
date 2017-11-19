@@ -11,13 +11,17 @@ using Models.Tools;
 
 namespace Models.Operations
 {
-    public class OrderOperations
+    public class OrderOperations : IDisposable
     {
         private LrdrContext _context;
+        private CommentOperations _commentOperations;
 
-        public OrderOperations(LrdrContext context)
+        public OrderOperations(LrdrContext context, CommentOperations commentOperations)
         {
             _context = context;
+            _commentOperations = commentOperations;
+            _commentOperations.OnModifyEventHandler += OnModifyComment;
+            _commentOperations.OnDeleteEventHandler += OnDeleteComment;
         }
 
         /// <summary>
@@ -235,19 +239,23 @@ namespace Models.Operations
         /// <summary>
         /// Проверка прав на редактирование заказа. Заказ можно редактировать владельцу и админу
         /// </summary>
-        public async Task<bool> CheckRights(int orderId, string userEmail)
+        public static async Task<bool> CheckRights(int orderId, string userEmail)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == userEmail.ToLower());
-            if (user == null) return false;
-
-            var order = await GetAsync(orderId);
-            if (order == null)
+            using (var context = new LrdrContext())
             {
-                throw new NotFoundException();
-            }
+                var user = await context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == userEmail.ToLower());
+                if (user == null) return false;
 
-            if ((order.OwnerUserId == user.Id) || (user.Role == Role.PortalAdmin) ) return true;
-            return false;
+                var order = await context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+                if (order == null)
+                {
+                    throw new NotFoundException();
+                }
+
+                if ((order.OwnerUserId == user.Id) || (user.Role == Role.PortalAdmin)) return true;
+                return false;
+            }
+            
         }
 
         public async Task UpdateUpdatedDate(int orderId)
@@ -261,6 +269,21 @@ namespace Models.Operations
             await _context.SaveChangesAsync();
         }
 
+        private async Task OnModifyComment(object sender, Comment comment)
+        {
+            await UpdateUpdatedDate(comment.OrderId);
+        }
+
+        private async Task OnDeleteComment(object sender, Comment comment)
+        {
+            await UpdateUpdatedDate(comment.OrderId);
+        }
+
+        public void Dispose()
+        {
+            _context?.Dispose();
+            _commentOperations.OnModifyEventHandler -= OnModifyComment;
+        }
     }
 
     public enum OrderSorting

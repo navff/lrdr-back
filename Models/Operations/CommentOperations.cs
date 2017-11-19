@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Models;
+using Camps.BLL.Utilities;
 using Camps.Tools;
 using Models.Entities;
 using Models.Tools;
@@ -13,13 +14,14 @@ namespace Models.Operations
 {
     public class CommentOperations
     {
+        public AsyncEventHandler<Comment> OnModifyEventHandler { get; set; }
+        public AsyncEventHandler<Comment> OnDeleteEventHandler { get; set; }
         private LrdrContext _context;
-        private OrderOperations _orderOperations;
+        
 
         public CommentOperations(LrdrContext context)
         {
             _context = context;
-            _orderOperations = new OrderOperations(_context);
         }
 
         public async Task<Comment> GetAsync(int id)
@@ -98,8 +100,11 @@ namespace Models.Operations
             try
             {
                 var result = _context.Comments.Add(comment);
-                await _orderOperations.UpdateUpdatedDate(comment.OrderId);
                 await _context.SaveChangesAsync();
+                if (this.OnModifyEventHandler != null)
+                {
+                    await this.OnModifyEventHandler.Invoke(this, result);
+                }
                 return result;
             }
             catch (Exception ex)
@@ -118,8 +123,10 @@ namespace Models.Operations
 
                 oldComment.Text = commentText;
                 await _context.SaveChangesAsync();
-                await _orderOperations.UpdateUpdatedDate(oldComment.OrderId);
-
+                if (this.OnModifyEventHandler != null)
+                {
+                    await this.OnModifyEventHandler.Invoke(this, oldComment);
+                }
                 return oldComment;
             }
             catch (Exception ex)
@@ -136,7 +143,10 @@ namespace Models.Operations
                 var comment = await GetAsync(id);
                 _context.Comments.Remove(comment);
                 await _context.SaveChangesAsync();
-                await _orderOperations.UpdateUpdatedDate(comment.OrderId);
+                if (this.OnModifyEventHandler != null)
+                {
+                    await this.OnModifyEventHandler.Invoke(this, comment);
+                }
             }
             catch (Exception ex)
             {
@@ -154,7 +164,7 @@ namespace Models.Operations
 
             if (user.Role == Role.PortalAdmin) return true;
 
-            return await _orderOperations.CheckRights(comment.OrderId, userEmail);
+            return await OrderOperations.CheckRights(comment.OrderId, userEmail);
         }
     }
 }
