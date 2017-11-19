@@ -71,7 +71,7 @@ namespace Models.Operations
         }
 
         public async Task<PageViewDTO<Order>> SearchAsync(string word="", int? customerUserId=null,
-                                                          int? ownerUserId = null,
+                                                          int? contractorUserId = null,
                                                           bool? isPaid = null,
                                                           OrderSorting sortby=OrderSorting.Updated, 
                                                           int page=1)
@@ -98,9 +98,9 @@ namespace Models.Operations
                     query = query.Where(o => o.CustomerUserId == customerUserId.Value);
                 }
 
-                if (ownerUserId.HasValue)
+                if (contractorUserId.HasValue)
                 {
-                    query = query.Where(o => o.ContractorUserId == ownerUserId.Value);
+                    query = query.Where(o => o.ContractorUserId == contractorUserId.Value);
                 }
 
                 if (isPaid == true)
@@ -128,7 +128,7 @@ namespace Models.Operations
                     case OrderSorting.Deadline:
                         query = query.OrderByDescending(o => o.Deadline);
                         break;
-                    case OrderSorting.Owner:
+                    case OrderSorting.Contractor:
                         query = query.OrderBy(o => o.ContractorUser.Name);
                         break;
                     default:
@@ -309,7 +309,7 @@ namespace Models.Operations
         Updated = 1,
         Created = 2,
         Deadline = 3,
-        Owner = 4,
+        Contractor = 4,
         Customer = 5
     }
 }

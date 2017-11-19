@@ -45,6 +45,11 @@ namespace API.ViewModels
         /// </summary>
         public string RoleName { get; set; }
 
+        /// <summary>
+        /// Краткое описание
+        /// </summary>
+        public string About { get; set; }
+
     }
 
     public class UserViewModelShortGet
@@ -90,6 +95,11 @@ namespace API.ViewModels
 
         [Required]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Небольшой текст о пользователе
+        /// </summary>
+        public string About { get; set; }
     }
 
     /// <summary>

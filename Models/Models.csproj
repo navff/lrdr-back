@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201711190438270_init.Designer.cs">
       <DependentUpon>201711190438270_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711190626410_add_user_about.cs" />
+    <Compile Include="Migrations\201711190626410_add_user_about.Designer.cs">
+      <DependentUpon>201711190626410_add_user_about.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Operations\CommentOperations.cs" />
     <Compile Include="Operations\FileOperations.cs" />
@@ -114,6 +118,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711190438270_init.resx">
       <DependentUpon>201711190438270_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711190626410_add_user_about.resx">
+      <DependentUpon>201711190626410_add_user_about.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

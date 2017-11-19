@@ -56,7 +56,7 @@ namespace Models
                 .HasForeignKey(u => u.CustomerUserId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>().HasMany(u => u.OrdersAsOwner)
+            modelBuilder.Entity<User>().HasMany(u => u.OrdersAsContractor)
                 .WithRequired()
                 .HasForeignKey(u => u.ContractorUserId)
                 .WillCascadeOnDelete(false);

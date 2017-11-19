@@ -879,14 +879,14 @@
             GUID-код, который будет в адресной строке
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelGet.OwnerUserId">
+        <member name="P:API.ViewModels.OrderViewModelGet.ContractorUserId">
             <summary>
             Id пользователя, который создал заказ
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderViewModelGet.OwnerUser">
+        <member name="P:API.ViewModels.OrderViewModelGet.ContractorUser">
             <summary>
-            Пользователь, который создал заказ
+            Пользователь-исполнитель
             </summary>
         </member>
         <member name="P:API.ViewModels.OrderViewModelGet.Name">
@@ -955,12 +955,12 @@
             GUID-код, который будет в адресной строке
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderShortViewModelGet.OwnerUserId">
+        <member name="P:API.ViewModels.OrderShortViewModelGet.ContractorUserId">
             <summary>
             Id пользователя, который исполняет заказ
             </summary>
         </member>
-        <member name="P:API.ViewModels.OrderShortViewModelGet.OwnerUser">
+        <member name="P:API.ViewModels.OrderShortViewModelGet.ContractorUser">
             <summary>
             Пользователь, который создал заказ
             </summary>
@@ -1181,6 +1181,11 @@
             Название роли
             </summary>
         </member>
+        <member name="P:API.ViewModels.UserViewModelGet.About">
+            <summary>
+            Краткое описание
+            </summary>
+        </member>
         <member name="P:API.ViewModels.UserViewModelShortGet.Email">
             <summary>
             Электропочта
@@ -1216,6 +1221,11 @@
             ID формы. По этому идентификатору связываются временные файлы
             с активностями. После сохранения активности, все TempFile с указанным FormId
             превратятся в Picture и привяжутся в данной активности.
+            </summary>
+        </member>
+        <member name="P:API.ViewModels.UserViewModelPut.About">
+            <summary>
+            Небольшой текст о пользователе
             </summary>
         </member>
         <member name="T:API.ViewModels.UserRegisterViewModel">

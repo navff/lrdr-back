@@ -22,12 +22,12 @@ namespace API.ViewModels
         /// <summary>
         /// Id пользователя, который создал заказ
         /// </summary>
-        public int OwnerUserId { get; set; }
+        public int ContractorUserId { get; set; }
 
         /// <summary>
-        /// Пользователь, который создал заказ
+        /// Пользователь-исполнитель
         /// </summary>
-        public UserViewModelGet OwnerUser { get; set; }
+        public UserViewModelGet ContractorUser { get; set; }
 
         /// <summary>
         /// Название заказа
@@ -104,12 +104,12 @@ namespace API.ViewModels
         /// <summary>
         /// Id пользователя, который исполняет заказ
         /// </summary>
-        public int OwnerUserId { get; set; }
+        public int ContractorUserId { get; set; }
 
         /// <summary>
         /// Пользователь, который создал заказ
         /// </summary>
-        public UserViewModelGet OwnerUser { get; set; }
+        public UserViewModelGet ContractorUser { get; set; }
 
         /// <summary>
         /// Название заказа
@@ -210,7 +210,7 @@ namespace API.ViewModels
     {
         public string Word { get; set; } = null;
         public int? CustomerUserId { get; set; } = null;
-        public int? OwnerUserId { get; set; } = null;
+        public int? ContractorUserId { get; set; } = null;
         public bool? isPaid { get; set; } = null;
     }
 

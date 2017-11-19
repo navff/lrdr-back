@@ -69,7 +69,7 @@ namespace Models.Operations
                     case PaymentSearchType.CustomerUser:
                         query = query.Where(p => p.Order.CustomerUserId == id);
                         break;
-                    case PaymentSearchType.OwnerUser:
+                    case PaymentSearchType.ContractorUser:
                         query = query.Where(p => p.Order.ContractorUserId == id);
                         break;
                     case PaymentSearchType.SystemUser:
@@ -199,7 +199,7 @@ namespace Models.Operations
     public enum PaymentSearchType
     {
         SystemUser = 0,
-        OwnerUser = 1,
+        ContractorUser = 1,
         CustomerUser = 2,
         Order = 3,
         All = 4,

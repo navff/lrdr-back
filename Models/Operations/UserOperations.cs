@@ -73,6 +73,7 @@ namespace API.Operations
             userInDb.AvatarFileId = user.AvatarFileId;
             userInDb.Role = user.Role;
             userInDb.Email = user.Email;
+            userInDb.About = user.About;
 
             await _context.SaveChangesAsync();
             return userInDb;

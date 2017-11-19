@@ -44,10 +44,12 @@ namespace API.Models
 
         public bool IsDeleted { get; set; }
 
+        public string About { get; set; }
+
         public virtual ICollection<Comment> Comments { get; set; }
 
         [InverseProperty("ContractorUser")]
-        public virtual ICollection<Order> OrdersAsOwner { get; set; }
+        public virtual ICollection<Order> OrdersAsContractor { get; set; }
 
         [InverseProperty("CustomerUser")]
         public virtual ICollection<Order> OrdersAsCustomer { get; set; }

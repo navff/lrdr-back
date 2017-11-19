@@ -57,7 +57,7 @@ namespace API.Controllers
             if (searchViewModel == null) searchViewModel = new SearchOrderViewModelGet();
             var dto = await _orderOperations.SearchAsync(word: searchViewModel.Word, 
                                                          customerUserId: searchViewModel.CustomerUserId,
-                                                         ownerUserId:searchViewModel.OwnerUserId,
+                                                         contractorUserId:searchViewModel.ContractorUserId,
                                                          isPaid:searchViewModel.isPaid,
                                                          sortby: searchViewModel.SortBy, 
                                                          page: searchViewModel.Page);
