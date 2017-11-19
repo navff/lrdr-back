@@ -349,12 +349,12 @@ namespace Models.Operations
 
         //=============================================================================================================
         //Отправка мейла
-        private static bool SendEmail_NewOrder(string token, int orderId, string to)
+        public bool SendEmail_NewOrder(string token, string orderCode, string to)
         {
             var s = new StringBuilder();
             s.Append("Здравствуйте!<br/>");
             s.AppendFormat("На сайте «LightOrder» создан для вас создан заказ. Перейдите по ссылке  " +
-                           "<a href='https://test.lrdr.ru/orders/{0}?token={1}'>ссылке</a>.<br/>", orderId, token);
+                           "<a href='https://test.lrdr.ru/orders/{0}?token={1}'>ссылке</a>.<br/>", orderCode, token);
 
             var msg = new EmailMessage()
             {

@@ -102,6 +102,8 @@ namespace API.Controllers
         public async Task<IHttpActionResult> Post(OrderViewModelPost postViewModel)
         {
             var order = Mapper.Map<Order>(postViewModel);
+
+            // Устанавливаем клиента
             var client = await _userOperations.GetAsync(postViewModel.CustomerEmail);
             if (client == null)
             {
@@ -112,20 +114,39 @@ namespace API.Controllers
                     DateRegistered = DateTimeOffset.Now,
                     Role = Role.RegisteredUser,
                 });
-                // TODO: написать письмо клиенту о том, что для него лежит заказик
-
             }
+            order.CustomerUserId = client.Id;
+
+            // Устанавливаем исполнителя
+            User contractor;
             if ( (postViewModel.ContractorUserId == 0) &&
                  (User.Identity.Name.ToLower() != postViewModel.CustomerEmail.ToLower()))
             {
-                var contractor = await _userOperations.GetAsync(User.Identity.Name);
-                order.ContractorUserId = contractor.Id;
+                contractor = await _userOperations.GetAsync(User.Identity.Name);
             }
+            else
+            {
+                contractor = await _userOperations.GetAsync(postViewModel.ContractorUserId);
+            }
+            order.ContractorUserId = contractor.Id;
+            order.ContractorUser = contractor;
 
-            order.CustomerUserId = client.Id;
+            // Устанавливаем текущего пользователя
             var currentUser = await _userOperations.GetAsync(User.Identity.Name);
             order.PostedByUserId = currentUser.Id;
             order = await _orderOperations.AddAsync(order);
+
+            // Отправляем почту клиенту или исполнителю
+            if (currentUser.Id != client.Id)
+            {
+                _orderOperations.SendEmail_NewOrder(client.AuthToken, order.Code, client.Email);
+            }
+            else if (currentUser.Id == client.Id)
+            {
+                _orderOperations.SendEmail_NewOrder(order.ContractorUser.AuthToken, order.Code, order.ContractorUser.Email);
+            }
+            
+
             return await Get(order.Code);
         }
 
