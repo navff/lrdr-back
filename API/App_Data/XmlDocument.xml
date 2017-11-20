@@ -642,7 +642,7 @@
         </member>
         <member name="M:API.Controllers.OrderController.Search(API.ViewModels.SearchOrderViewModelGet)">
             <summary>
-            Все заказы для текузего пользователя
+            Все заказы для текущего пользователя
             </summary>
         </member>
         <member name="M:API.Controllers.OrderController.Put(System.Int32,API.ViewModels.OrderViewModelPost)">

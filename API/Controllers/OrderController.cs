@@ -47,7 +47,7 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Все заказы для текузего пользователя
+        /// Все заказы для текущего пользователя
         /// </summary>
         [HttpGet]
         [ResponseType(typeof(PageView<OrderShortViewModelGet>))]
@@ -56,9 +56,13 @@ namespace API.Controllers
         public async Task<IHttpActionResult> Search([FromUri] SearchOrderViewModelGet searchViewModel)
         {
             if (searchViewModel == null) searchViewModel = new SearchOrderViewModelGet();
-            var dto = await _orderOperations.SearchAsync(word: searchViewModel.Word, 
+            var currentUser = await _userOperations.GetAsync(User.Identity.Name);
+
+            var dto = await _orderOperations.SearchAsync(currentUser.Id,
+                                                         word: searchViewModel.Word, 
                                                          customerUserId: searchViewModel.CustomerUserId,
                                                          contractorUserId:searchViewModel.ContractorUserId,
+
                                                          isPaid:searchViewModel.isPaid,
                                                          sortby: searchViewModel.SortBy, 
                                                          page: searchViewModel.Page);

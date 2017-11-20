@@ -47,7 +47,7 @@ namespace Tests.Operations
         public void Search_Ok_Test()
         {
             var order = _context.Orders.First();
-            var result = _orderOperations.SearchAsync(order.Name.Substring(2)).Result;
+            var result = _orderOperations.SearchAsync(order.ContractorUserId, order.Name.Substring(2)).Result;
             Assert.IsTrue(result.Content.Any());
         }
 
@@ -55,7 +55,7 @@ namespace Tests.Operations
         public void Search_NoResults_Test()
         {
             var order = _context.Orders.First();
-            var result = _orderOperations.SearchAsync("94nb8ends934n3jwndskjh348").Result;
+            var result = _orderOperations.SearchAsync(order.ContractorUserId, "94nb8ends934n3jwndskjh348").Result;
             Assert.IsFalse(result.Content.Any());
         }
 

@@ -78,7 +78,9 @@ namespace Models.Operations
             }
         }
 
-        public async Task<PageViewDTO<OrderDto>> SearchAsync(string word="", int? customerUserId=null,
+        public async Task<PageViewDTO<OrderDto>> SearchAsync(int currentUserId,
+                                                          string word="", 
+                                                          int? customerUserId=null,
                                                           int? contractorUserId = null,
                                                           bool? isPaid = null,
                                                           OrderSorting sortby=OrderSorting.Updated, 
@@ -86,7 +88,8 @@ namespace Models.Operations
         {
             try
             {
-                var query = _context.Orders.Include(o => o.CustomerUser)
+                var query = _context.Orders.Where(o => (o.ContractorUserId == currentUserId) || (o.CustomerUserId==currentUserId) )
+                                           .Include(o => o.CustomerUser)
                                            .Include(o => o.ContractorUser)
                                            .AsQueryable();
 
